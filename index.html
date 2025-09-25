@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lembou Pharel</title>
+  <title> It's me Lembou Pharel</title>
 
   <!-- Remix Icon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
-  <link rel="shortcut icon" href="./assets/1header.jpg" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/fav.png" type="image/x-icon">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="./css/bootstrap.css">
@@ -73,6 +73,11 @@
       background-origin:border-box; background-clip:content-box,border-box; box-shadow:0 0 30px rgba(34,211,238,0.3);
     }
 
+    @media(max-width:900px){
+      .hero { flex-direction:column-reverse; text-align:center; }
+      .hero__image img { width:160px; height:160px; }
+    }
+
     /* === Sections === */
     .section__container { 
       padding:5rem 3rem; max-width:1200px; margin:auto; 
@@ -81,8 +86,27 @@
     }
     .section__header { font-size:2.2rem; font-weight:700; margin-bottom:1rem; text-align:center; color:#fff; }
     .section__description { color:#9ca3af; text-align:center; max-width:800px; margin:auto 0 3rem; }
-    .section__list { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-    .section__list div { background:rgba(34,211,238,0.1); padding:1rem; border-radius:12px; min-width:250px; flex:1 1 250px; }
+
+    /* === Cards (Skills & Projects) === */
+    .section__list {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:1.5rem;
+    }
+    .card {
+      display:block; padding:1.5rem; border-radius:16px;
+      background: linear-gradient(145deg, rgba(34,211,238,0.08), rgba(255,255,255,0.03));
+      box-shadow:0 0 15px rgba(34,211,238,0.15); color:inherit;
+      transition:0.3s all ease;
+    }
+    .card h4 { margin-bottom:0.75rem; color:#22d3ee; font-weight:600; }
+    .card p { color:#cbd5e1; font-size:0.95rem; }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:0 0 25px rgba(34,211,238,0.35);
+      background: linear-gradient(145deg, rgba(34,211,238,0.15), rgba(255,255,255,0.06));
+      cursor:pointer;
+    }
 
     /* === Footer === */
     footer { text-align:center; padding:2rem; font-size:0.9rem; color:#6b7280; border-top:1px solid #1f1f1f; background:linear-gradient(135deg,#0f172a,#1e293b); }
@@ -105,11 +129,14 @@
     .setup-footer { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; }
     .setup-footer span { background:rgba(34,211,238,0.1); padding:0.4rem 0.8rem; border-radius:8px; font-size:0.85rem; color:#9ca3af; }
 
-    /* === Responsive Hero Image === */
-    @media(max-width:900px){
-      .hero { flex-direction:column-reverse; text-align:center; }
-      .hero__image img { width:160px; height:160px; }
+    /* abouts-skills */
+    .about-skills .card:hover {
+      transform: none;
+      box-shadow: 0 0 15px rgba(34,211,238,0.15);
+      background: linear-gradient(145deg, rgba(34,211,238,0.08), rgba(255,255,255,0.03));
+      cursor: default;
     }
+
   </style>
 </head>
 <body>
@@ -123,10 +150,9 @@
       </button>
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav mx-auto">       
-          <li class="nav-item"><a class="nav-link" href="#about">About & Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gaming">Gaming</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#setup">Setup</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gaming">Certificates</a></li>
+          <li class="nav-item"><a class="nav-link" href="#setup">Work Experience</a></li>
         </ul>
         <a href="#contact" class="btn">Contact</a>
       </div>
@@ -154,41 +180,78 @@
     </div>
   </header>
 
-  <!-- About & Skills -->
-  <section class="section__container" id="about">
-    <h2 class="section__header">About & Skills</h2>
-    <p class="section__description">
-      I apply engineering principles to design, develop, test, and maintain reliable software systems. 
-      My focus is on creating efficient solutions that meet customer needs, using modern tools and technologies to ensure software quality and performance.
-    </p>
-    <div class="section__list">
-      <div><h4>Web Development</h4><p>HTML, CSS, JavaScript, PHP, MySQL, NodeJS, Firebase, MongoDB — frontend & backend development.</p></div>
-      <div><h4>SEO Optimization</h4><p>Improving website visibility, refining content, structure, and technical elements to drive organic traffic.</p></div>
-      <div><h4>Data Analysis</h4><p>Transform raw data into actionable insights to support decision-making and business growth.</p></div>
-      <div><h4>Embedded Systems</h4><p>Arduino programming, IoT, robotics, hardware-software integration.</p></div>
-      <div><h4>Computer Assembly</h4><p>Build, configure, and repair computer systems ensuring performance and security.</p></div>
-      <div><h4>Core Principles</h4><p>KISS, YAGNI, DRY. Embrace failure and learn. Clear problem definition is half solution.</p></div>
+<!-- About & Skills -->
+<section class="section__container" id="about">
+  <h2 class="section__header">About & Skills</h2>
+  <p class="section__description text-center mx-auto">
+    I apply engineering principles to design, develop, test, and maintain reliable software systems. 
+    My focus is on creating efficient solutions that meet customer needs, using modern tools and technologies to ensure software quality and performance.
+  </p>
+  <div class="section__list about-skills">
+    <div class="card">
+      <h4><i class="ri-code-line"></i> Web Development</h4>
+      <p>HTML, CSS, JavaScript, PHP, MySQL, NodeJS, Firebase, MongoDB — frontend & backend development.</p>
     </div>
-  </section>
-
-  <!-- Gaming -->
-  <section class="section__container" id="gaming">
-    <h2 class="section__header">Gaming Activities</h2>
-    <p class="section__description">I enjoy gaming and often share my gaming activities. Check out my latest games and achievements.</p>
-  </section>
-
-  <!-- Projects -->
-  <section class="section__container" id="projects">
-    <h2 class="section__header">Featured Projects</h2>
-    <div class="section__list">
-      <div><h4>Web Appp</h4><p>Convert any website into a functional Android APK easily.</p><p><strong>Tech:</strong> Kotlin</p></div>
-      <div><h4>Project Canis</h4><p>Modular WhatsApp chatbot with Prisma ORM, Docker, and TypeScript.</p><p><strong>Tech:</strong> TypeScript</p></div>
-      <div><h4>Ulisha Store</h4><p>Modern e-commerce platform with seamless shopping experience.</p><p><strong>Tech:</strong> TypeScript</p></div>
-      <div><h4>Point of Sale</h4><p>Lightweight web-based offline-capable POS system.</p><p><strong>Tech:</strong> JavaScript</p></div>
-      <div><h4>Axleshift Core 1</h4><p>Freight management platform with security and reliability.</p><p><strong>Tech:</strong> JavaScript</p></div>
-      <div><h4>Project Webvium</h4><p>Privacy-focused Android web browser built from scratch.</p><p><strong>Tech:</strong> Java</p></div>
+    <div class="card">
+      <h4><i class="ri-bar-chart-line"></i> SEO Optimization</h4>
+      <p>Improving website visibility, refining content, structure, and technical elements to drive organic traffic.</p>
     </div>
-  </section>
+    <div class="card">
+      <h4><i class="ri-database-2-line"></i> Data Analysis</h4>
+      <p>Transform raw data into actionable insights to support decision-making and business growth.</p>
+    </div>
+    <div class="card">
+      <h4><i class="ri-robot-line"></i> Embedded Systems</h4>
+      <p>Arduino programming, IoT, robotics, hardware-software integration.</p>
+    </div>
+    <div class="card">
+      <h4><i class="ri-computer-line"></i> Computer Assembly</h4>
+      <p>Build, configure, and repair computer systems ensuring performance and security.</p>
+    </div>
+    <div class="card">
+      <h4><i class="ri-lightbulb-line"></i> Core Principles</h4>
+      <p>KISS, YAGNI, DRY. Embrace failure and learn. Clear problem definition is half solution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="section__container" id="projects">
+  <h2 class="section__header">Featured Projects</h2>
+  <div class="section__list">
+    <a href="#" class="card">
+      <h4>Web App</h4>
+      <p>Convert any website into a functional Android APK easily.</p>
+      <span class="badge bg-info text-dark">Kotlin</span>
+    </a>
+    <a href="#" class="card">
+      <h4>Project Canis</h4>
+      <p>Modular WhatsApp chatbot with Prisma ORM, Docker, and TypeScript.</p>
+      <span class="badge bg-warning text-dark">TypeScript</span>
+    </a>
+    <a href="#" class="card">
+      <h4>Ulisha Store</h4>
+      <p>Modern e-commerce platform with seamless shopping experience.</p>
+      <span class="badge bg-success text-dark">TypeScript</span>
+    </a>
+    <a href="#" class="card">
+      <h4>Point of Sale</h4>
+      <p>Lightweight web-based offline-capable POS system.</p>
+      <span class="badge bg-primary text-light">JavaScript</span>
+    </a>
+    <a href="#" class="card">
+      <h4>Axleshift Core 1</h4>
+      <p>Freight management platform with security and reliability.</p>
+      <span class="badge bg-danger text-light">JavaScript</span>
+    </a>
+    <a href="#" class="card">
+      <h4>Project Webvium</h4>
+      <p>Privacy-focused Android web browser built from scratch.</p>
+      <span class="badge bg-secondary text-light">Java</span>
+    </a>
+  </div>
+</section>
+
 
   <!-- Setup -->
   <section class="section__container" id="setup">
@@ -236,29 +299,65 @@
   </section>
 
   <!-- Footer -->
+    <!-- Footer -->
   <footer>
-    <div class="footer__container" style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between;">
-      <div style="flex:1 1 250px; min-width:200px;">
-        <h3 style="color:#22d3ee;">Lembou Pharel</h3>
-        <p>Building modern software experiences with passion and precision. Striving for excellence, one project at a time.</p>
-        <p>This site is Open Source. <a href="#" style="color:#22d3ee;">View on GitHub</a></p>
-        <p>lembou@example.com</p>
+    <div class="footer__container container py-5 d-flex flex-wrap justify-content-between align-items-start gap-4">
+      
+      <!-- Left Column -->
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h3 style="color:#22d3ee; font-weight:700;">Lembou Pharel</h3>
+        <p style="color:#d1d5db;">
+          Building modern software experiences with passion and precision. 
+          Striving for excellence, one project at a time.
+        </p>
+        <p style="color:#9ca3af; font-size:0.9rem;">
+          This site is Open Source. <a href="#" style="color:#22d3ee;">View on GitHub</a>
+        </p>
+        <p style="color:#d1d5db; margin-top:0.5rem;">
+          <i class="ri-mail-line"></i> lembou@example.com
+        </p>
       </div>
-      <div style="flex:1 1 150px; min-width:150px;">
-        <h4 style="color:#22d3ee;">Links</h4>
-        <ul style="list-style:none; padding:0;">
-          <li><a href="#home" style="color:#d1d5db;">Home</a></li>
-          <li><a href="#projects" style="color:#d1d5db;">Projects</a></li>
-          <li><a href="#gaming" style="color:#d1d5db;">Gaming</a></li>
-          <li><a href="#about" style="color:#d1d5db;">About</a></li>
-          <li><a href="#setup" style="color:#d1d5db;">Setup</a></li>
+
+      <!-- Links -->
+      <div style="flex:1 1 180px; min-width:150px;">
+        <h4 style="color:#22d3ee; font-weight:600;">Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin-top:0.5rem;">
+          <li><a href="#home" style="color:#d1d5db; text-decoration:none;">Home</a></li>
+          <li><a href="#projects" style="color:#d1d5db; text-decoration:none;">Projects</a></li>
+          <li><a href="#gaming" style="color:#d1d5db; text-decoration:none;">Certificates</a></li>
+          <li><a href="#about" style="color:#d1d5db; text-decoration:none;">About</a></li>
+          <li><a href="#setup" style="color:#d1d5db; text-decoration:none;">Setup</a></li>
         </ul>
       </div>
+
+      <!-- Social -->
+      <div style="flex:1 1 100%; min-width:200px; text-align:center;">
+        <h4 style="color:#22d3ee; font-weight:600;">Follow Me</h4>
+        <div class="d-flex justify-content-center gap-4 mt-3">
+          <a href="https://github.com/yourusername" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-github-fill"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-linkedin-box-fill"></i>
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-twitter-x-fill"></i>
+          </a>
+          <a href="https://instagram.com/yourusername" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-instagram-line"></i>
+          </a>
+        </div>
+      </div>
+
+
     </div>
-    <div style="text-align:center; padding:1rem; color:#6b7280; font-size:0.9rem; margin-top:1rem;">
+
+    <!-- Bottom -->
+    <div style="text-align:center; padding:1rem; color:#6b7280; font-size:0.9rem; border-top:1px solid #1f1f1f;">
       &copy; 2025 Lembou Pharel. All rights reserved.
     </div>
   </footer>
+
 
   <!-- Bootstrap JS -->
   <script src="./js/bootstrap.bundle.min.js"></script>
