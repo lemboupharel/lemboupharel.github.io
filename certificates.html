@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates - Lembou Pharel</title>
+
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="./assets/fav.png" type="image/x-icon">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.css">
+
+  <style>
+    /* === Global CSS === */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { 
+      font-family:'Inter', sans-serif; 
+      background:linear-gradient(135deg,#0f172a,#1e293b); 
+      color:#e5e7eb; 
+      scroll-behavior:smooth; 
+      line-height:1.6; 
+    }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; border-radius:12px; }
+
+    /* Navbar */
+    .navbar {
+      padding: 1rem 3rem;
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .navbar-brand { font-weight:700; font-size:1.5rem; color:#22d3ee !important; }
+    .navbar-nav .nav-link { font-weight:500; color:#e5e7eb !important; }
+    .navbar-nav .nav-link:hover { color:#22d3ee !important; }
+    .navbar .btn { 
+      background:#22d3ee; color:#0a0a0a; border-radius:30px; 
+      padding:0.5rem 1rem; font-weight:600; transition:0.3s; 
+    }
+    .navbar .btn:hover { background:#06b6d4; }
+
+    /* Certificates Section */
+    .section__container { 
+      padding:5rem 3rem; max-width:1200px; margin:auto; 
+      background:linear-gradient(135deg,#0f172a,#1e293b); border-radius:20px; 
+      box-shadow:0 0 40px rgba(34,211,238,0.15); margin-bottom:3rem; 
+    }
+    .section__header { font-size:2.2rem; font-weight:700; margin-bottom:1rem; text-align:center; color:#fff; }
+    .section__description { color:#9ca3af; text-align:center; max-width:800px; margin:auto 0 3rem; }
+
+    .certificate-list {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:2rem;
+    }
+
+    .certificate-card {
+      display:flex;
+      flex-direction:column;
+      background: rgba(15,23,42,0.85);
+      border-radius:16px;
+      box-shadow:0 0 25px rgba(34,211,238,0.2);
+      overflow:hidden;
+      transition:0.3s ease;
+    }
+    .certificate-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow:0 0 35px rgba(34,211,238,0.35);
+    }
+
+    .certificate-card img {
+      width:100%;
+      height:180px;
+      object-fit:cover;
+    }
+
+    .certificate-card-body {
+      padding:1.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.5rem;
+    }
+    .certificate-card-body h4 { color:#22d3ee; font-weight:700; font-size:1.2rem; }
+    .certificate-card-body p { color:#cbd5e1; font-size:0.95rem; }
+    .certificate-card-body .download-btn {
+      align-self:flex-start;
+      padding:0.5rem 1rem;
+      background:#f97316;
+      color:white;
+      border-radius:8px;
+      font-weight:600;
+      transition:0.3s;
+    }
+    .certificate-card-body .download-btn:hover { background:#ea580c; }
+
+    /* Footer */
+    footer { text-align:center; padding:2rem; font-size:0.9rem; color:#6b7280; border-top:1px solid #1f1f1f; background:linear-gradient(135deg,#0f172a,#1e293b); }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Lembou Pharel</a>
+      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="ri-menu-line"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav mx-auto">       
+          <li class="nav-item"><a class="nav-link" href="index.html#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#setup">My Setup</a></li>
+        </ul>
+        <a href="index.html#contact" class="btn">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Certificates Section -->
+  <section class="section__container" id="certificates">
+    <h2 class="section__header">Certificates</h2>
+    <p class="section__description text-center mx-auto">
+      Here are some of my professional certifications in web development, cybersecurity, and systems programming. You can view or download them below.
+    </p>
+
+    <div class="certificate-list">
+      <div class="certificate-card">
+        <img src="assets/certif/image/iotcertificate.jpg" alt="CEH Certificate">
+        <div class="certificate-card-body">
+          <h4>IoT (Internet of Things) Wireless & Cloud Computing Emerging Technologies</h4>
+          <p>an online course authorized by Yonsei University and offered through Coursera.</p>
+          <a href="assets/certif/pdf/iotcertificate.pdf" download class="download-btn"><i class="ri-download-line"></i> Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <img src="assets/certif/image/nasa space app.jpg" alt="CompTIA Security+">
+        <div class="certificate-card-body">
+          <h4>Space Apps Challenge certificate</h4>
+          <p> NASA International Space Apps Challenge certificate for outstanding participation and efforts to address challenges we face on Earth and in space.</p>
+          <a href="assets/certif/pdf/nasa space app.pdf" download class="download-btn"><i class="ri-download-line"></i> Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer__container container py-5 d-flex flex-wrap justify-content-between align-items-start gap-4">
+      
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h3 style="color:#22d3ee; font-weight:700;">Lembou Pharel</h3>
+        <p style="color:#d1d5db;">
+          Building modern software experiences with passion and precision. 
+          Striving for excellence, one project at a time.
+        </p>
+        <p style="color:#9ca3af; font-size:0.9rem;">
+          This site is Open Source. <a href="#" style="color:#22d3ee;">View on GitHub</a>
+        </p>
+        <p style="color:#d1d5db; margin-top:0.5rem;">
+          <i class="ri-mail-line"></i> pharellembou@gmail.com
+        </p>
+      </div>
+
+      <div style="flex:1 1 180px; min-width:150px;">
+        <h4 style="color:#22d3ee; font-weight:600;">Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin-top:0.5rem;">
+          <li><a href="index.html#home" style="color:#d1d5db; text-decoration:none;">Home</a></li>
+          <li><a href="index.html#projects" style="color:#d1d5db; text-decoration:none;">Projects</a></li>
+          <li><a href="#certificates" style="color:#d1d5db; text-decoration:none;">Certificates</a></li>
+          <li><a href="index.html#about" style="color:#d1d5db; text-decoration:none;">About</a></li>
+          <li><a href="index.html#setup" style="color:#d1d5db; text-decoration:none;">Setup</a></li>
+        </ul>
+      </div>
+
+      <div style="flex:1 1 100%; min-width:200px; text-align:center;">
+        <h4 style="color:#22d3ee; font-weight:600;">Follow Me</h4>
+        <div class="d-flex justify-content-center gap-4 mt-3">
+          <a href="https://github.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-github-fill"></i>
+          </a>
+          <a href="https://linkedin.com/in/lembou-pharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-linkedin-box-fill"></i>
+          </a>
+          <a href="https://twitter.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-twitter-x-fill"></i>
+          </a>
+          <a href="https://instagram.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+            <i class="ri-instagram-line"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; padding:1rem; color:#6b7280; font-size:0.9rem; border-top:1px solid #1f1f1f;">
+      &copy; 2025 Lembou Pharel. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
