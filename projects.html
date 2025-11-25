@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificates | Lembou Pharel</title>
+  <title>Projects | Lembou Pharel</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -162,7 +162,6 @@
       opacity: 1;
     }
 
-
     .topbar-brand {
       font-family: 'Roboto Mono', monospace;
       font-size: 1.3rem;
@@ -259,7 +258,7 @@
       text-align: center;
     }
 
-    /* Certificates Section */
+    /* Projects Section */
     .section {
       position: relative;
       padding: 5rem 2rem;
@@ -298,78 +297,100 @@
       line-height: 1.8;
     }
 
-    /* Certificate Cards */
-    .certificate-list {
+    /* Cards Grid */
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      margin-top: 3rem;
     }
 
-    .certificate-card {
+    .card {
       background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
+      padding: 2rem;
       border-radius: 16px;
-      overflow: hidden;
       border: 1px solid rgba(34, 211, 238, 0.2);
       transition: all 0.4s ease;
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
-    .certificate-card:hover {
+    .card:hover {
       transform: translateY(-8px) scale(1.02);
       box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
       background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(255, 255, 255, 0.06));
       border-color: var(--primary);
     }
 
-    .certificate-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .certificate-card-body {
-      padding: 1.5rem;
-    }
-
-    .certificate-card-body h4 {
+    .card h4 {
       color: var(--primary);
       margin-bottom: 1rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .certificate-card-body p {
-      color: var(--text-dim);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .download-btn {
-      display: inline-flex;
+      font-size: 1.4rem;
+      display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--secondary);
-      color: white;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
+    }
+
+    .card p {
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
       font-weight: 600;
-      transition: all 0.3s;
-      font-size: 0.95rem;
     }
 
-    .download-btn:hover {
-      background: #ea580c;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
-      color: white;
+    .badge-js {
+      background: rgba(247, 223, 30, 0.2);
+      color: #f7df1e;
     }
 
-    .download-btn i {
-      font-size: 1.1rem;
+    .badge-ts {
+      background: rgba(49, 120, 198, 0.2);
+      color: #3178c6;
+    }
+
+    .badge-c {
+      background: rgba(85, 169, 255, 0.2);
+      color: #55a9ff;
+    }
+
+    .github-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(34, 211, 238, 0.2);
+      font-size: 0.9rem;
+    }
+
+    .github-stats span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-dim);
+    }
+
+    .github-stats i {
+      color: var(--primary);
+    }
+
+    .github-stats .count {
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    @keyframes stat-update {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); color: var(--primary); }
+      100% { transform: scale(1); }
     }
 
     /* Responsive */
@@ -398,13 +419,8 @@
       .section-header {
         font-size: 2rem;
       }
-
-      .certificate-list {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
-
 </head>
 <body>
   <!-- Animated Background -->
@@ -433,8 +449,8 @@
   <aside class="sidebar" id="sidebar">
     <ul class="nav-links">
       <li><a href="index.html"><i class="ri-home-line"></i> Home</a></li>
-      <li><a href="projects.html"><i class="ri-code-box-line"></i> Projects</a></li>
-      <li><a href="certificates.html" class="active"><i class="ri-award-line"></i> Certificates</a></li>
+      <li><a href="projects.html" class="active"><i class="ri-code-box-line"></i> Projects</a></li>
+      <li><a href="certificates.html"><i class="ri-award-line"></i> Certificates</a></li>
       <li><a href="#setup"><i class="ri-shake-hands-line"></i> Partners</a></li>
       <li><a href="contact.html"><i class="ri-mail-send-line"></i> Contact</a></li>
     </ul>
@@ -443,36 +459,43 @@
     </div>
   </aside>
 
-  <!-- Certificates Section -->
-  <section class="section" id="certificates">
+  <!-- Projects Section -->
+  <section class="section" id="projects">
     <div class="section-container">
-      <h2 class="section-header">Certificates</h2>
+      <h2 class="section-header">Featured Projects</h2>
       <p class="section-description">
-        Here are some of my professional certifications in web development, cybersecurity, and systems programming. You can view or download them below.
+        Explore my latest work showcasing expertise in backend development, AI integration, and systems programming.
       </p>
-
-      <div class="certificate-list">
-        <div class="certificate-card">
-          <img src="assets/certif/image/iotcertificate.jpg" alt="IoT Certificate">
-          <div class="certificate-card-body">
-            <h4><i class="ri-signal-tower-line"></i> IoT Wireless & Cloud Computing</h4>
-            <p>Internet of Things (IoT) Wireless & Cloud Computing Emerging Technologies - an online course authorized by Yonsei University and offered through Coursera.</p>
-            <a href="assets/certif/pdf/iotcertificate.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
-            </a>
+      <div class="cards-grid">
+        <a href="https://github.com/lemboupharel/gmind" target="_blank" class="card" data-github="lemboupharel/gmind">
+          <h4><i class="ri-brain-line"></i> GMind</h4>
+          <p>A dockerized Node.js AI chat application powered by Google AI Studio API and PostgreSQL, using Prisma ORM for database management.</p>
+          <span class="badge badge-js">JavaScript</span>
+          <div class="github-stats">
+            <span class="stars"><i class="ri-star-fill"></i> <span class="count">...</span></span>
+            <span class="forks"><i class="ri-git-branch-fill"></i> <span class="count">...</span></span>
           </div>
-        </div>
-
-        <div class="certificate-card">
-          <img src="assets/certif/image/nasa space app.jpg" alt="NASA Space Apps Challenge">
-          <div class="certificate-card-body">
-            <h4><i class="ri-rocket-line"></i> NASA Space Apps Challenge</h4>
-            <p>NASA International Space Apps Challenge certificate for outstanding participation and efforts to address challenges we face on Earth and in space.</p>
-            <a href="assets/certif/pdf/nasa space app.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
-            </a>
+        </a>
+        
+        <a href="https://github.com/lemboupharel/psycho-bot" target="_blank" class="card" data-github="lemboupharel/psycho-bot">
+          <h4><i class="ri-message-3-line"></i> Psycho-bot</h4>
+          <p>A WhatsApp bot built with Baileys, ready to deploy on Render, Vercel, or Koyeb. Fully automated messaging capabilities.</p>
+          <span class="badge badge-ts">TypeScript</span>
+          <div class="github-stats">
+            <span class="stars"><i class="ri-star-fill"></i> <span class="count">...</span></span>
+            <span class="forks"><i class="ri-git-branch-fill"></i> <span class="count">...</span></span>
           </div>
-        </div>
+        </a>
+        
+        <a href="https://github.com/lemboupharel/Simle-Text-editor-in-C" target="_blank" class="card" data-github="lemboupharel/Simle-Text-editor-in-C">
+          <h4><i class="ri-file-edit-line"></i> Simple Text Editor</h4>
+          <p>A simple text editor implemented in C that allows users to open, edit, and save text files with efficient memory management.</p>
+          <span class="badge badge-c">C</span>
+          <div class="github-stats">
+            <span class="stars"><i class="ri-star-fill"></i> <span class="count">...</span></span>
+            <span class="forks"><i class="ri-git-branch-fill"></i> <span class="count">...</span></span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -544,6 +567,55 @@
         sidebar.classList.remove('active');
         menuToggle.classList.remove('active');
       }
+    });
+
+    // GitHub Stats Fetcher
+    document.addEventListener('DOMContentLoaded', function() {
+      const projectCards = document.querySelectorAll('.card[data-github]');
+      
+      async function fetchGitHubStats() {
+        for (const card of projectCards) {
+          const repo = card.getAttribute('data-github');
+          if (!repo) continue;
+
+          const statsElement = card.querySelector('.github-stats');
+          if (!statsElement) continue;
+
+          const starsElement = card.querySelector('.stars .count');
+          const forksElement = card.querySelector('.forks .count');
+
+          try {
+            const response = await fetch(`https://api.github.com/repos/${repo}`, {
+              headers: {
+                'Accept': 'application/vnd.github.v3+json',
+              }
+            });
+
+            if (!response.ok) {
+              throw new Error('API request failed');
+            }
+
+            const data = await response.json();
+            
+            if (starsElement) {
+              starsElement.textContent = data.stargazers_count.toLocaleString();
+              starsElement.style.animation = 'stat-update 0.6s ease';
+            }
+            if (forksElement) {
+              forksElement.textContent = data.forks_count.toLocaleString();
+              forksElement.style.animation = 'stat-update 0.6s ease';
+            }
+          } catch (error) {
+            console.log(`Failed to fetch stats for ${repo}:`, error);
+            if (starsElement) starsElement.textContent = 'N/A';
+            if (forksElement) forksElement.textContent = 'N/A';
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      }
+
+      setTimeout(fetchGitHubStats, 500);
     });
   </script>
 </body>

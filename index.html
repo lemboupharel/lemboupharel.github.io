@@ -1,342 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> It's me Lembou Pharel</title>
-
-  <!-- Remix Icon -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lembou Pharel | Backend Developer & Cybersecurity Engineer</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="./css/bootstrap.css">
-
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* === Global Reset === */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { 
-      font-family:'Inter', sans-serif; 
-      background:linear-gradient(135deg,#0f172a,#1e293b); 
-      color:#e5e7eb; 
-      scroll-behavior:smooth; 
-      line-height:1.6; 
+    :root {
+      --primary: #22d3ee;
+      --secondary: #f97316;
+      --bg-dark: #0f172a;
+      --bg-panel: #1e293b;
+      --text-light: #e5e7eb;
+      --text-dim: #9ca3af;
     }
-    a { text-decoration:none; color:inherit; }
-    img { max-width:100%; display:block; border-radius:12px; }
 
-    /* === Navbar === */
-    .navbar {
-      padding: 1rem 3rem;
-      background: rgba(15,23,42,0.9);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .grid-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+    }
+
+    .hex-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hexagon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.1;
+      animation: hexFloat linear infinite;
+    }
+
+    @keyframes hexFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .hexagon::before {
+      content: '⬡';
+      font-size: 60px;
+      color: var(--primary);
+    }
+
+    /* Top Bar */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1f1f1f;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      justify-content: space-between;
     }
-    .navbar-brand { font-weight:700; font-size:1.5rem; color:#22d3ee !important; }
-    .navbar-nav .nav-link { font-weight:500; color:#e5e7eb !important; }
-    .navbar-nav .nav-link:hover { color:#22d3ee !important; }
-    .navbar .btn { 
-      background:#22d3ee; color:#0a0a0a; border-radius:30px; 
-      padding:0.5rem 1rem; font-weight:600; transition:0.3s; 
-    }
-    .navbar .btn:hover { background:#06b6d4; }
 
-    /* === Hero Section === */
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .menu-toggle {
+      background: rgba(34, 211, 238, 0.1);
+      border: 2px solid var(--primary);
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(34, 211, 238, 0.2);
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .menu-toggle:hover span {
+      background: #06b6d4;
+      box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      /*transform: rotate(45deg) translateY(8px);*/
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 1;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      /*transform: rotate(-45deg) translateY(-8px);*/
+    }
+
+    .topbar-brand {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: var(--bg-dark);
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: #06b6d4;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 70px;
+      width: 280px;
+      height: calc(100vh - 70px);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-right: 1px solid rgba(34, 211, 238, 0.2);
+      z-index: 999;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .nav-links {
+      list-style: none;
+      padding: 2rem 0;
+      flex: 1;
+    }
+
+    .nav-links li {
+      margin: 0;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(34, 211, 238, 0.1);
+      border-left-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .nav-links a i {
+      font-size: 1.2rem;
+      width: 24px;
+    }
+
+    .sidebar-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(34, 211, 238, 0.2);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* Hero Section */
     .hero {
-      display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
-      gap:3rem; padding:8rem 3rem 4rem; max-width:1200px; margin:6rem auto 3rem;
-      text-align:center; background:linear-gradient(135deg,#0f172a,#1e293b);
-      border-radius:20px; box-shadow:0 0 40px rgba(34,211,238,0.15);
-    }
-    .hero__content { flex:1 1 500px; max-width:600px; margin:auto; }
-    .hero__content h1 { font-size:2.8rem; font-weight:700; margin-bottom:0.5rem; }
-    .hero__content h1 span { color:#22d3ee; }
-    .hero__content h2 { font-size:1.3rem; font-weight:500; color:#9ca3af; margin-bottom:1rem; }
-    .hero__content p { color:#d1d5db; margin:0 auto 1.5rem; }
-    .hero__buttons { display:flex; justify-content:center; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
-    .hero__buttons .btn { padding:0.8rem 1.5rem; border-radius:8px; font-weight:600; text-transform:uppercase; font-size:0.9rem; transition:0.3s; }
-    .hero__buttons .hire { background:#f97316; color:white; }
-    .hero__buttons .hire:hover { background:#ea580c; }
-    .hero__buttons .email { background:#1f2937; color:white; }
-    .hero__buttons .email:hover { background:#111827; }
-    .hero__stats { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; }
-    .hero__stats div { text-align:center; }
-    .hero__stats span { display:block; font-size:2rem; font-weight:700; }
-    .hero__stats div:nth-child(1) span { color:#f97316; }
-    .hero__stats div:nth-child(2) span { color:#3b82f6; }
-    .hero__stats div:nth-child(3) span { color:#22c55e; }
-    .hero__stats small { color:#9ca3af; }
-    .hero__image { flex:0 0 220px; text-align:center; }
-    .hero__image img { 
-      width:200px; height:200px; object-fit:cover; border-radius:50%; 
-      border:6px solid transparent; background:linear-gradient(135deg,#facc15,#a855f7,#22d3ee);
-      background-origin:border-box; background-clip:content-box,border-box; box-shadow:0 0 30px rgba(34,211,238,0.3);
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      z-index: 1;
+      margin-left: 280px;
+      transition: margin-left 0.3s ease;
     }
 
-    @media(max-width:900px){
-      .hero { flex-direction:column-reverse; text-align:center; }
-      .hero__image img { width:160px; height:160px; }
+    .hero-container {
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
     }
 
-    /* === Sections === */
-    .section__container { 
-      padding:5rem 3rem; max-width:1200px; margin:auto; 
-      background:linear-gradient(135deg,#0f172a,#1e293b); border-radius:20px; 
-      box-shadow:0 0 40px rgba(34,211,238,0.15); margin-bottom:3rem; 
+    .hero-content {
+      flex: 1;
+      min-width: 300px;
     }
-    .section__header { font-size:2.2rem; font-weight:700; margin-bottom:1rem; text-align:center; color:#fff; }
-    .section__description { color:#9ca3af; text-align:center; max-width:800px; margin:auto 0 3rem; }
 
-    /* === Cards (Skills & Projects) === */
-    .section__list {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-      gap:1.5rem;
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #ea580c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-panel);
+      color: var(--text-light);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(34, 211, 238, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-item:nth-child(1) .stat-number {
+      color: var(--secondary);
+    }
+
+    .stat-item:nth-child(2) .stat-number {
+      color: #3b82f6;
+    }
+
+    .stat-item:nth-child(3) .stat-number {
+      color: #22c55e;
+    }
+
+    .stat-label {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid transparent;
+      background: linear-gradient(135deg, #facc15, #a855f7, #22d3ee);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
+      animation: profilePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes profilePulse {
+      0%, 100% { box-shadow: 0 0 60px rgba(34, 211, 238, 0.5); }
+      50% { box-shadow: 0 0 80px rgba(168, 85, 247, 0.6); }
+    }
+
+    /* Section Styles */
+    .section {
+      position: relative;
+      padding: 5rem 2rem;
+      z-index: 1;
+      margin-left: 280px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 4rem;
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+    }
+
+    .section-header {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .section-description {
+      text-align: center;
+      color: var(--text-dim);
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
     .card {
-      display:block; padding:1.5rem; border-radius:16px;
-      background: linear-gradient(145deg, rgba(34,211,238,0.08), rgba(255,255,255,0.03));
-      box-shadow:0 0 15px rgba(34,211,238,0.15); color:inherit;
-      transition:0.3s all ease;
+      background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      transition: all 0.4s ease;
+      cursor: pointer;
     }
-    .card h4 { margin-bottom:0.75rem; color:#22d3ee; font-weight:600; }
-    .card p { color:#cbd5e1; font-size:0.95rem; }
+
     .card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow:0 0 25px rgba(34,211,238,0.35);
-      background: linear-gradient(145deg, rgba(34,211,238,0.15), rgba(255,255,255,0.06));
-      cursor:pointer;
+      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
+      background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(255, 255, 255, 0.06));
+      border-color: var(--primary);
     }
 
-    /* === Footer === */
-    footer { text-align:center; padding:2rem; font-size:0.9rem; color:#6b7280; border-top:1px solid #1f1f1f; background:linear-gradient(135deg,#0f172a,#1e293b); }
+    .card h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-    /* === Setup Section === */
+    .card p {
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .badge-js {
+      background: rgba(247, 223, 30, 0.2);
+      color: #f7df1e;
+    }
+
+    .badge-ts {
+      background: rgba(49, 120, 198, 0.2);
+      color: #3178c6;
+    }
+
+    .badge-c {
+      background: rgba(85, 169, 255, 0.2);
+      color: #55a9ff;
+    }
+
+    /* Setup Section */
     .setup-box {
-      display:flex; gap:2rem; align-items:flex-start; background:rgba(15,23,42,0.9);
-      padding:2rem; border-radius:16px; box-shadow:0 0 25px rgba(34,211,238,0.15); flex-wrap:wrap; margin-bottom:2rem;
-    }
-    .setup-left { flex:0 0 180px; text-align:center; margin-bottom:1rem; }
-    .ascii { font-family: monospace; color:#22d3ee; font-size:0.9rem; line-height:1.2; }
-    .setup-right { display:grid; grid-template-columns: repeat(2, 1fr); gap:0.5rem 1rem; font-size:0.95rem; }
-    .setup-right .setup-item strong { color:#22d3ee; }
-    @media(max-width:768px){ .setup-right { grid-template-columns:1fr; gap:0.25rem 0; } }
-
-    .setup-command { background:#0a0a0a; padding:1rem; border-radius:12px; font-family:monospace; font-size:0.95rem; color:#e5e7eb; margin-bottom:1.5rem; }
-    .setup-command .user { color:#22c55e; font-weight:600; }
-    .setup-command .host { color:#facc15; font-weight:600; }
-
-    .setup-footer { display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:center; }
-    .setup-footer span { background:rgba(34,211,238,0.1); padding:0.4rem 0.8rem; border-radius:8px; font-size:0.85rem; color:#9ca3af; }
-
-    /* abouts-skills */
-    .about-skills .card:hover {
-      transform: none;
-      box-shadow: 0 0 15px rgba(34,211,238,0.15);
-      background: linear-gradient(145deg, rgba(34,211,238,0.08), rgba(255,255,255,0.03));
-      cursor: default;
+      display: flex;
+      gap: 3rem;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
 
+    .ascii-art {
+      font-family: 'Roboto Mono', monospace;
+      color: var(--primary);
+      font-size: 0.9rem;
+      line-height: 1.2;
+      white-space: pre;
+    }
+
+    .setup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem 2rem;
+      flex: 1;
+    }
+
+    .setup-item strong {
+      color: var(--primary);
+    }
+
+    .terminal-command {
+      background: #0a0a0a;
+      padding: 1.5rem;
+      border-radius: 12px;
+      font-family: 'Roboto Mono', monospace;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+    }
+
+    .terminal-user {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    .terminal-host {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      padding: 4rem 2rem 2rem;
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid rgba(34, 211, 238, 0.2);
+      z-index: 1;
+      margin-left: 280px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(34, 211, 238, 0.1);
+      border-radius: 50%;
+      color: var(--primary);
+      font-size: 1.3rem;
+      transition: all 0.3s;
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      color: var(--bg-dark);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: var(--text-dim);
+      border-top: 1px solid rgba(34, 211, 238, 0.1);
+      margin-top: 3rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .hero,
+      .section,
+      footer {
+        margin-left: 0;
+      }
+
+      .topbar {
+        padding: 0 1rem;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .section-container {
+        padding: 2rem;
+      }
+
+      .setup-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="grid-overlay"></div>
+    <div class="hex-container" id="hexagons"></div>
+    <div id="particles"></div>
+  </div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Lembou Pharel</a>
-      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <i class="ri-menu-line"></i>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-        <ul class="navbar-nav mx-auto">       
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="./certificates.html">Certificates</a></li>
-          <li class="nav-item"><a class="nav-link" href="#setup">My Setup</a></li>
-        </ul>
-        <a href="#contact" class="btn">Contact</a>
-      </div>
+      <div class="topbar-brand">LEMBOU PHAREL</div>
     </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="hero" id="home">
-    <div class="hero__content">
-      <h1>Hi, I'm <span>Lembou Pharel</span></h1>
-      <h2>Backend Developer | Cybersecurity Engineer</h2>
-      <p>I specialize in building robust, secure backend systems and solving real-world problems with scalable technology.</p>
-      <div class="hero__buttons">
-        <a href="#contact" class="btn hire"> Hire Me </a>
-        <a href="mailto:youremail@example.com" class="btn email">pharellembou@gmail.com</a>
-      </div>
-      <div class="hero__stats">
-        <div><span>5+</span><small>Years Experience</small></div>
-        <div><span>82+</span><small>Projects</small></div>
-        <div><span>15+</span><small>Happy Clients</small></div>
-      </div>
-    </div>
-    <div class="hero__image">
-      <img src="assets/header.jpg" alt="Lembou Pharel">
+    <div class="topbar-right">
+      <button class="nav-cta" onclick="location.href='#contact'">Contact</button>
     </div>
   </header>
 
-<!-- About & Skills -->
-<section class="section__container" id="about">
-  <h2 class="section__header">About & Skills</h2>
-  <p class="section__description text-center mx-auto">
-    I apply engineering principles to design, develop, test, and maintain reliable software systems. 
-    My focus is on creating efficient solutions that meet customer needs, using modern tools and technologies to ensure software quality and performance.
-  </p>
-  <div class="section__list about-skills">
-    <div class="card">
-      <h4><i class="ri-code-line"></i> Web Development</h4>
-      <p>HTML, CSS, JavaScript, MySQL, NodeJS, Firebase, PostgreSQL, SQLite — frontend & backend development.</p>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <ul class="nav-links">
+      <li><a href="#home" class="active"><i class="ri-home-line"></i> Home</a></li>
+      <li><a href="projects.html"><i class="ri-code-box-line"></i> Projects</a></li>
+      <li><a href="certificates.html"><i class="ri-award-line"></i> Certificates</a></li>
+      <li><a href="#setup"><i class="ri-shake-hands-line"></i> Partners</a></li>
+      <li><a href="contact.html"><i class="ri-mail-send-line"></i> Contact</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      © 2025 Lembou Pharel
     </div>
-    <div class="card">
-      <h4><i class="ri-shield-keyhole-line"></i> Network Security</h4>
-      <p>Monitor network traffic using Wireshark, conduct vulnerability assessments with tools like Nmap, and secure network infrastructure</p>
-    </div>
-    <div class="card">
-      <h4><i class="ri-robot-line"></i> Systems programming</h4>
-      <p>Write low-level code, Networking stacks, Memory management, I/O and device interfacing.</p>
-    </div>
-    <div class="card">
-      <h4><i class="ri-tools-fill"></i> Reverse engineering</h4>
-      <p>Analyzing compiled programs (binary) to understand its behavior, logic, data formats, protocols, or vulnerabilities when source code is not available.</p>
-    </div>
-  </div>
-</section>
+  </aside>
 
-<!-- Featured Projects -->
-<section class="section__container" id="projects">
-  <h2 class="section__header">Featured Projects</h2>
-  <div class="section__list">
-    <a href="https://github.com/lemboupharel/gmind" target="_blank" class="card">
-      <h4>gmind</h4>
-      <p>GMind is a dockerized Node.js AI chat application powered by Google AI Studio API and PostgreSQL, using Prisma ORM for database management.</p>
-      <span class="badge bg-info text-dark">JavaScript</span>
-    </a>
-    <a href="https://github.com/lemboupharel/psycho-bot" class="card">
-      <h4>Psycho-bot</h4>
-      <p>A WhatsApp bot built with Baileys, ready to deploy on Render, Vercel, or Koyeb</p>
-      <span class="badge bg-warning text-dark">TypeScript</span>
-    </a>
-    <a href="https://github.com/lemboupharel/Simle-Text-editor-in-C" target="_blank" class="card">
-      <h4>Simle-Text-editor-in-C</h4>
-      <p>This is a simple text editor implemented in C that allows users to open, edit, and save text files.</p>
-      <span class="badge bg-success text-dark">C</span>
-    </a>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Hi, I'm Lembou Pharel</h1>
+        <p class="hero-subtitle">Backend Developer | Cybersecurity Engineer</p>
+        <p class="hero-description">
+          I specialize in building robust, secure backend systems and solving real-world problems with scalable technology.
+          Passionate about engineering reliable software that makes a difference.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Hire Me</a>
+          <a href="mailto:pharellembou@gmail.com" class="btn btn-secondary">pharellembou@gmail.com</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">82+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="./assets/header.jpg" alt="Lembou Pharel">
+      </div>
+    </div>
+  </section>
 
+  <!-- About & Skills -->
+  <section class="section" id="about">
+    <div class="section-container">
+      <h2 class="section-header">About & Skills</h2>
+      <p class="section-description">
+        I apply engineering principles to design, develop, test, and maintain reliable software systems.
+        My focus is on creating efficient solutions that meet customer needs, using modern tools and technologies
+        to ensure software quality and performance.
+      </p>
+      <div class="cards-grid">
+        <div class="card">
+          <h4><i class="ri-code-line"></i> Web Development</h4>
+          <p>HTML, CSS, JavaScript, MySQL, NodeJS, Firebase, PostgreSQL, SQLite — frontend & backend development with modern frameworks and best practices.</p>
+        </div>
+        <div class="card">
+          <h4><i class="ri-shield-keyhole-line"></i> Network Security</h4>
+          <p>Monitor network traffic using Wireshark, conduct vulnerability assessments with tools like Nmap, and secure network infrastructure against threats.</p>
+        </div>
+        <div class="card">
+          <h4><i class="ri-robot-line"></i> Systems Programming</h4>
+          <p>Write low-level code, networking stacks, memory management, I/O and device interfacing for optimal performance.</p>
+        </div>
+        <div class="card">
+          <h4><i class="ri-tools-fill"></i> Reverse Engineering</h4>
+          <p>Analyzing compiled programs (binary) to understand behavior, logic, data formats, protocols, or vulnerabilities when source code is not available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="section-container">
+      <h2 class="section-header">Featured Projects</h2>
+      <p class="section-description">
+        Explore my latest work showcasing expertise in backend development, AI integration, and systems programming.
+      </p>
+      <div class="cards-grid">
+        <a href="https://github.com/lemboupharel/gmind" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+          <h4><i class="ri-brain-line"></i> GMind</h4>
+          <p>A dockerized Node.js AI chat application powered by Google AI Studio API and PostgreSQL, using Prisma ORM for database management.</p>
+          <span class="badge badge-js">JavaScript</span>
+        </a>
+        <a href="https://github.com/lemboupharel/psycho-bot" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+          <h4><i class="ri-message-3-line"></i> Psycho-bot</h4>
+          <p>A WhatsApp bot built with Baileys, ready to deploy on Render, Vercel, or Koyeb. Fully automated messaging capabilities.</p>
+          <span class="badge badge-ts">TypeScript</span>
+        </a>
+        <a href="https://github.com/lemboupharel/Simle-Text-editor-in-C" target="_blank" class="card" style="text-decoration: none; color: inherit;">
+          <h4><i class="ri-file-edit-line"></i> Simple Text Editor</h4>
+          <p>A simple text editor implemented in C that allows users to open, edit, and save text files with efficient memory management.</p>
+          <span class="badge badge-c">C</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Setup -->
-  <section class="section__container" id="setup">
-    <h2 class="section__header">My Setup</h2>
-    <div class="setup-box">
-      <div class="setup-left mx-auto">
-        <pre class="ascii">
-  .--.
-  |o_o |
-  |:_/ |
-  //   \ \
+  <section class="section" id="setup">
+    <div class="section-container">
+      <h2 class="section-header">My Development Setup</h2>
+      <div class="setup-box">
+        <div class="ascii-art">
+     .--.
+    |o_o |
+    |:_/ |
+   //   \ \
   (|     | )
   /'\_   _/`\
   \___)=(___/
-        </pre>
+        </div>
+        <div class="setup-grid">
+          <div class="setup-item"><strong>User:</strong> pharel@archlinux</div>
+          <div class="setup-item"><strong>Host:</strong> HP ENVY</div>
+          <div class="setup-item"><strong>OS:</strong> Arch Linux</div>
+          <div class="setup-item"><strong>Kernel:</strong> Linux 6.16.8-zen2-1</div>
+          <div class="setup-item"><strong>Uptime:</strong> 742d</div>
+          <div class="setup-item"><strong>Packages:</strong> 2181 (pacman)</div>
+          <div class="setup-item"><strong>Shell:</strong> zsh 5.9</div>
+          <div class="setup-item"><strong>WM:</strong> Hyprland</div>
+          <div class="setup-item"><strong>Resolution:</strong> 1920x1080</div>
+          <div class="setup-item"><strong>Terminal:</strong> kitty</div>
+        </div>
       </div>
-      <div class="setup-right mx-auto">
-        <div class="setup-item"><strong>User:</strong> pharel@archlinux</div>
-        <div class="setup-item"><strong>Host:</strong> HP ENVY </div>
-        <div class="setup-item"><strong>OS:</strong> Arch Linux</div>
-        <div class="setup-item"><strong>Kernel:</strong> Linux 6.16.8-zen2-1</div>
-        <div class="setup-item"><strong>Uptime:</strong> 742d</div>
-        <div class="setup-item"><strong>Packages:</strong> 2181 (pacman)</div>
-        <div class="setup-item"><strong>Shell:</strong> zsh 5.9</div>
-        <div class="setup-item"><strong>WM:</strong> Hyprland</div>
-        <div class="setup-item"><strong>Resolution:</strong> 1920x1080</div>
-        <div class="setup-item"><strong>Terminal:</strong> kitty</div>
+      <div class="terminal-command">
+        <span class="terminal-user">pharel</span>@<span class="terminal-host">archlinux</span> :~$
+        <br>$ neofetch --config off
+        <br><small style="color: #6b7280;">(example command)</small>
       </div>
-    </div>
-
-    <div class="setup-command">
-      <span class="user">pharel</span>@<span class="host">archlinux</span> :~$  
-      <br>$ neofetch --config off <br>
-      <small>(example command)</small>
-    </div>
-
-    <div class="setup-footer text-center">
-      <span>Theme: Tokyo-Night [GTK2/3]</span>
-      <span>Tela-circle-purple [GTK2/3]</span>
-      <span>Font: CaskaydiaCove Nerd</span>
-      <span>Shell: zsh 5.9</span>
-      <span>Terminal: kitty</span>
-      <span>Packages: 2181</span>
     </div>
   </section>
 
   <!-- Footer -->
-    <!-- Footer -->
-  <footer>
-    <div class="footer__container container py-5 d-flex flex-wrap justify-content-between align-items-start gap-4">
-      
-      <!-- Left Column -->
-      <div style="flex:1 1 250px; min-width:220px;">
-        <h3 style="color:#22d3ee; font-weight:700;">Lembou Pharel</h3>
-        <p style="color:#d1d5db;">
-          Building modern software experiences with passion and precision. 
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Lembou Pharel</h4>
+        <p style="color: var(--text-dim); margin-bottom: 1rem;">
+          Building modern software experiences with passion and precision.
           Striving for excellence, one project at a time.
         </p>
-        <p style="color:#9ca3af; font-size:0.9rem;">
-          This site is Open Source. <a href="#" style="color:#22d3ee;">View on GitHub</a>
-        </p>
-        <p style="color:#d1d5db; margin-top:0.5rem;">
+        <p style="color: var(--text-dim);">
           <i class="ri-mail-line"></i> pharellembou@gmail.com
         </p>
-      </div>
-
-      <!-- Links -->
-      <div style="flex:1 1 180px; min-width:150px;">
-        <h4 style="color:#22d3ee; font-weight:600;">Quick Links</h4>
-        <ul style="list-style:none; padding:0; margin-top:0.5rem;">
-          <li><a href="#home" style="color:#d1d5db; text-decoration:none;">Home</a></li>
-          <li><a href="#projects" style="color:#d1d5db; text-decoration:none;">Projects</a></li>
-          <li><a href="./certificates.html" style="color:#d1d5db; text-decoration:none;">Certificates</a></li>
-          <li><a href="#about" style="color:#d1d5db; text-decoration:none;">About</a></li>
-          <li><a href="#setup" style="color:#d1d5db; text-decoration:none;">Setup</a></li>
-        </ul>
-      </div>
-
-      <!-- Social -->
-      <div style="flex:1 1 100%; min-width:200px; text-align:center;">
-        <h4 style="color:#22d3ee; font-weight:600;">Follow Me</h4>
-        <div class="d-flex justify-content-center gap-4 mt-3">
-          <a href="https://github.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+        <div class="social-icons">
+          <a href="https://github.com/lemboupharel" target="_blank" class="social-icon">
             <i class="ri-github-fill"></i>
           </a>
-          <a href="https://linkedin.com/in/lembou-pharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+          <a href="https://linkedin.com/in/lembou-pharel" target="_blank" class="social-icon">
             <i class="ri-linkedin-box-fill"></i>
           </a>
-          <a href="https://twitter.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+          <a href="https://twitter.com/lemboupharel" target="_blank" class="social-icon">
             <i class="ri-twitter-x-fill"></i>
           </a>
-          <a href="https://instagram.com/lemboupharel" target="_blank" style="color:#d1d5db; font-size:1.6rem;">
+          <a href="https://instagram.com/lemboupharel" target="_blank" class="social-icon">
             <i class="ri-instagram-line"></i>
           </a>
         </div>
       </div>
-
-
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="./certificates.html">Certificates</a></li>
+          <li><a href="#setup">Setup</a></li>
+        </ul>
+      </div>
     </div>
-
-    <!-- Bottom -->
-    <div style="text-align:center; padding:1rem; color:#6b7280; font-size:0.9rem; border-top:1px solid #1f1f1f;">
-      &copy; 2025 Lembou Pharel. All rights reserved.
-    </div>
+    <div class="footer-bottom"></div>
   </footer>
 
+  <script>
+    // Animated particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const size = Math.random() * 3 + 1;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.animationDuration = `${15 + Math.random() * 15}s`;
+      particle.style.animationDelay = `${Math.random() * 10}s`;
+      particlesContainer.appendChild(particle);
+    }
 
-  <!-- Bootstrap JS -->
-  <script src="./js/bootstrap.bundle.min.js"></script>
+    // Hexagons
+    const hexContainer = document.getElementById('hexagons');
+    for (let i = 0; i < 8; i++) {
+      const hex = document.createElement('div');
+      hex.className = 'hexagon';
+      hex.style.left = `${Math.random() * 90}vw`;
+      hex.style.top = `${Math.random() * 90}vh`;
+      hex.style.animationDuration = `${30 + Math.random() * 20}s`;
+      hex.style.animationDelay = `${Math.random() * 5}s`;
+      hexContainer.appendChild(hex);
+    }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+
+      if (window.innerWidth > 968) {
+        sidebar.classList.toggle('collapsed');
+
+        // Update margin on content
+        const hero = document.querySelector('.hero');
+        const sections = document.querySelectorAll('.section');
+        const footer = document.querySelector('footer');
+
+        if (sidebar.classList.contains('collapsed')) {
+          hero.style.marginLeft = '0';
+          sections.forEach(s => s.style.marginLeft = '0');
+          footer.style.marginLeft = '0';
+        } else {
+          hero.style.marginLeft = '280px';
+          sections.forEach(s => s.style.marginLeft = '280px');
+          footer.style.marginLeft = '280px';
+        }
+      } else {
+        sidebar.classList.toggle('active');
+      }
+    });
+
+    // Close sidebar on mobile when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 968) {
+          sidebar.classList.remove('active');
+          menuToggle.classList.remove('active');
+        }
+
+        // Update active state
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 968 &&
+          sidebar.classList.contains('active') &&
+          !sidebar.contains(e.target) &&
+          !menuToggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+        menuToggle.classList.remove('active');
+      }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
-</html>

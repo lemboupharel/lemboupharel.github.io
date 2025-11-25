@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificates | Lembou Pharel</title>
+  <title>Contact | Lembou Pharel</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -162,7 +162,6 @@
       opacity: 1;
     }
 
-
     .topbar-brand {
       font-family: 'Roboto Mono', monospace;
       font-size: 1.3rem;
@@ -259,7 +258,7 @@
       text-align: center;
     }
 
-    /* Certificates Section */
+    /* Contact Section */
     .section {
       position: relative;
       padding: 5rem 2rem;
@@ -298,78 +297,182 @@
       line-height: 1.8;
     }
 
-    /* Certificate Cards */
-    .certificate-list {
+    /* Contact Layout */
+    .contact-content {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 2rem;
     }
 
-    .certificate-card {
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-card {
       background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
       border-radius: 16px;
-      overflow: hidden;
+      padding: 2rem;
       border: 1px solid rgba(34, 211, 238, 0.2);
-      transition: all 0.4s ease;
-      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .certificate-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(255, 255, 255, 0.06));
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
       border-color: var(--primary);
     }
 
-    .certificate-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .certificate-card-body {
-      padding: 1.5rem;
-    }
-
-    .certificate-card-body h4 {
+    .contact-card h3 {
       color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .certificate-card-body p {
-      color: var(--text-dim);
-      line-height: 1.7;
       margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .download-btn {
-      display: inline-flex;
+      font-size: 1.4rem;
+      display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--secondary);
-      color: white;
-      padding: 0.7rem 1.5rem;
+    }
+
+    .contact-card h3 i {
+      font-size: 1.5rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+    }
+
+    .contact-item:last-child {
+      border-bottom: none;
+    }
+
+    .contact-item i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      width: 24px;
+    }
+
+    .contact-item a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-item a:hover {
+      color: var(--primary);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .action-card {
+      background: linear-gradient(145deg, rgba(249, 115, 22, 0.1), rgba(255, 255, 255, 0.03));
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.2);
+      border-color: var(--secondary);
+    }
+
+    .action-card h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .action-card p {
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s;
-      font-size: 0.95rem;
+      width: 100%;
+      margin-bottom: 0.5rem;
     }
 
-    .download-btn:hover {
-      background: #ea580c;
+    .primary-btn {
+      background: var(--primary);
+      color: var(--bg-dark);
+    }
+
+    .primary-btn:hover {
+      background: #06b6d4;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 8px 20px rgba(34, 211, 238, 0.4);
+    }
+
+    .secondary-btn {
+      background: var(--secondary);
       color: white;
     }
 
-    .download-btn i {
-      font-size: 1.1rem;
+    .secondary-btn:hover {
+      background: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .copy-btn {
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    .copy-btn:hover {
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--primary);
+    }
+
+    .copy-notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: var(--bg-dark);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
+      z-index: 1001;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .copy-notification.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     /* Responsive */
@@ -399,12 +502,11 @@
         font-size: 2rem;
       }
 
-      .certificate-list {
+      .contact-content {
         grid-template-columns: 1fr;
       }
     }
   </style>
-
 </head>
 <body>
   <!-- Animated Background -->
@@ -425,7 +527,7 @@
       <div class="topbar-brand">LEMBOU PHAREL</div>
     </div>
     <div class="topbar-right">
-      <a href="index.html#contact" class="nav-cta">Contact</a>
+      <a href="#contact" class="nav-cta">Contact</a>
     </div>
   </header>
 
@@ -434,48 +536,92 @@
     <ul class="nav-links">
       <li><a href="index.html"><i class="ri-home-line"></i> Home</a></li>
       <li><a href="projects.html"><i class="ri-code-box-line"></i> Projects</a></li>
-      <li><a href="certificates.html" class="active"><i class="ri-award-line"></i> Certificates</a></li>
+      <li><a href="certificates.html"><i class="ri-award-line"></i> Certificates</a></li>
       <li><a href="#setup"><i class="ri-shake-hands-line"></i> Partners</a></li>
-      <li><a href="contact.html"><i class="ri-mail-send-line"></i> Contact</a></li>
+      <li><a href="contact.html" class="active"><i class="ri-mail-send-line"></i> Contact</a></li>
     </ul>
     <div class="sidebar-footer">
       © 2025 Lembou Pharel
     </div>
   </aside>
 
-  <!-- Certificates Section -->
-  <section class="section" id="certificates">
+  <!-- Contact Section -->
+  <section class="section" id="contact">
     <div class="section-container">
-      <h2 class="section-header">Certificates</h2>
+      <h2 class="section-header">Get In Touch</h2>
       <p class="section-description">
-        Here are some of my professional certifications in web development, cybersecurity, and systems programming. You can view or download them below.
+        Have a question, want to collaborate, or just want to say hello? Feel free to reach out through any of these channels.
       </p>
 
-      <div class="certificate-list">
-        <div class="certificate-card">
-          <img src="assets/certif/image/iotcertificate.jpg" alt="IoT Certificate">
-          <div class="certificate-card-body">
-            <h4><i class="ri-signal-tower-line"></i> IoT Wireless & Cloud Computing</h4>
-            <p>Internet of Things (IoT) Wireless & Cloud Computing Emerging Technologies - an online course authorized by Yonsei University and offered through Coursera.</p>
-            <a href="assets/certif/pdf/iotcertificate.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
-            </a>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-card">
+            <h3><i class="ri-information-line"></i> Contact Information</h3>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="ri-mail-line"></i>
+                <div>
+                  <a href="mailto:pharellembou@gmail.com">pharellembou@gmail.com</a>
+                  <button class="copy-btn" data-text="pharellembou@gmail.com">Copy</button>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="ri-discord-line"></i>
+                <div>
+                  <span>pharel_lems</span>
+                  <button class="copy-btn" data-text="pharel_lems">Copy</button>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="ri-github-line"></i>
+                <div>
+                  <a href="https://github.com/lemboupharel" target="_blank">github.com/lemboupharel</a>
+                  <button class="copy-btn" data-text="github.com/lemboupharel">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <h3><i class="ri-group-line"></i> Alternative Contact Methods</h3>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="ri-discord-line"></i>
+                <a href="https://discord.gg/xTF9KCjMHy" target="_blank">Join Discord Server</a>
+              </div>
+              <div class="contact-item">
+                <i class="ri-github-line"></i>
+                <a href="https://github.com/lemboupharel" target="_blank">GitHub Issues</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="certificate-card">
-          <img src="assets/certif/image/nasa space app.jpg" alt="NASA Space Apps Challenge">
-          <div class="certificate-card-body">
-            <h4><i class="ri-rocket-line"></i> NASA Space Apps Challenge</h4>
-            <p>NASA International Space Apps Challenge certificate for outstanding participation and efforts to address challenges we face on Earth and in space.</p>
-            <a href="assets/certif/pdf/nasa space app.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
+        <div class="contact-actions">
+          <div class="action-card">
+            <h3><i class="ri-heart-line"></i> Support My Work</h3>
+            <p>If you find my projects helpful, consider supporting me on Ko-fi!</p>
+            <a href="#" class="action-btn secondary-btn">
+              <i class="ri-cup-line"></i> Support me on Ko-fi
+            </a>
+          </div>
+
+          <div class="action-card">
+            <h3><i class="ri-send-plane-line"></i> Send a Message</h3>
+            <p>Click the button below to send me an email directly. This will open your default email client. Optionally copy paste the Email address and get in touch with me manually!</p>
+            <a href="mailto:lemboupharel@gmail.com" class="action-btn primary-btn">
+              <i class="ri-mail-send-line"></i> Send Email
             </a>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Copy Notification -->
+  <div class="copy-notification" id="copyNotification">
+    Copied to clipboard!
+  </div>
 
   <script>
     // Animated particles
@@ -544,6 +690,28 @@
         sidebar.classList.remove('active');
         menuToggle.classList.remove('active');
       }
+    });
+
+    // Copy to clipboard functionality
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    const copyNotification = document.getElementById('copyNotification');
+
+    copyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const textToCopy = button.getAttribute('data-text');
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          // Show notification
+          copyNotification.classList.add('show');
+          
+          // Hide notification after 2 seconds
+          setTimeout(() => {
+            copyNotification.classList.remove('show');
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+        });
+      });
     });
   </script>
 </body>
