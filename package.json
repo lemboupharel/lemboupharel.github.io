@@ -1,0 +1,22 @@
+{
+  "name": "personal_portfolio",
+  "version": "1.0.0",
+  "description": "Create a stunning and professional portfolio website from scratch!",
+  "main": "api/index.js",
+  "scripts": {
+    "run": "node api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemboupharel/lemboupharel.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lemboupharel/lemboupharel.github.io/issues"
+  },
+  "homepage": "https://github.com/lemboupharel/lemboupharel.github.io#readme"
+}
