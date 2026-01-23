@@ -1,39 +1,41 @@
 /* Enhanced Visual System - LEMBOU.SYS */
 
 :root {
-    /* Light Theme Colors */
-    --bg: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #fce7f3 100%);
-    --bg-solid: #f8fafc;
-    --panel: rgba(255, 255, 255, 0.8);
-    --panel-hover: rgba(255, 255, 255, 0.95);
+    /* GitHub Dark Theme Colors */
+    --bg: #0d1117;
+    --bg-solid: #0d1117;
+    --panel: rgba(22, 27, 34, 0.7);
+    --panel-hover: rgba(22, 27, 34, 0.95);
 
-    /* Primary Colors */
-    --primary: #06b6d4;
-    --primary-dark: #0891b2;
-    --primary-glow: rgba(6, 182, 212, 0.3);
+    /* Primary Colors (Blue & Cyan) */
+    --primary: #2f81f7;
+    /* GitHub Blue */
+    --primary-dark: #1f6feb;
+    --primary-glow: rgba(47, 129, 247, 0.25);
 
-    /* Accent Colors */
-    --accent-purple: #a78bfa;
-    --accent-orange: #f97316;
-    --accent-green: #10b981;
+    /* Secondary Accents */
+    --accent-cyan: #39c5cf;
+    --accent-green: #2ea043;
+    --accent-purple: #a371f7;
 
     /* Text Colors */
-    --text: #0f172a;
-    --text-dim: #64748b;
-    --text-muted: #94a3b8;
+    --text: #c9d1d9;
+    /* High contrast */
+    --text-dim: #8b949e;
+    --text-muted: #484f58;
 
     /* UI Elements */
-    --border: rgba(148, 163, 184, 0.2);
-    --shadow: rgba(15, 23, 42, 0.08);
-    --shadow-lg: rgba(15, 23, 42, 0.15);
+    --border: #30363d;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-lg: rgba(0, 0, 0, 0.6);
 
     /* Typography */
-    --font-content: 'Inter', -apple-system, sans-serif;
-    --font-mono: 'Roboto Mono', monospace;
+    --font-content: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
 
-    /* Transitions */
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transitions - Snappier */
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.1s ease-out;
 }
 
 * {
@@ -87,7 +89,7 @@ body {
     left: 0;
     right: 0;
     height: 64px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(13, 17, 23, 0.7);
     backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
@@ -253,7 +255,7 @@ body {
     margin-top: 4rem;
     color: var(--text-dim);
     font-size: 0.85rem;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(13, 17, 23, 0.8);
     backdrop-filter: blur(10px);
 }
 
@@ -264,7 +266,7 @@ body {
     top: 64px;
     width: 240px;
     height: calc(100vh - 64px);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(13, 17, 23, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     border-right: 1px solid var(--border);
     padding: 2rem 0;
@@ -336,7 +338,7 @@ body {
 .tag {
     display: inline-block;
     padding: 0.3rem 0.8rem;
-    background: rgba(6, 182, 212, 0.1);
+    background: rgba(47, 129, 247, 0.1);
     border: 1px solid var(--border);
     border-radius: 6px;
     font-size: 0.7rem;

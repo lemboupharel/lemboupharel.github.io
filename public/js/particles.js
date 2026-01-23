@@ -12,12 +12,12 @@ class ParticleSystem {
 
         // Configuration
         this.config = {
-            particleCount: options.particleCount || (window.innerWidth < 768 ? 30 : 60),
-            particleColors: options.colors || ['#22d3ee', '#a78bfa', '#f97316', '#06b6d4'],
-            maxSize: options.maxSize || 4,
+            particleCount: options.particleCount || (window.innerWidth < 768 ? 40 : 80),
+            particleColors: options.colors || ['#2f81f7', '#39c5cf', '#a371f7', '#2ea043'],
+            maxSize: options.maxSize || 3,
             minSize: options.minSize || 1,
-            speed: options.speed || 0.5,
-            connectionDistance: options.connectionDistance || 120,
+            speed: options.speed || 0.6,
+            connectionDistance: options.connectionDistance || 140,
             enableConnections: options.enableConnections !== false,
             enableMouseInteraction: options.enableMouseInteraction !== false
         };
@@ -84,7 +84,7 @@ class ParticleSystem {
 
                 if (distance < this.config.connectionDistance) {
                     const opacity = 1 - (distance / this.config.connectionDistance);
-                    this.ctx.strokeStyle = `rgba(34, 211, 238, ${opacity * 0.2})`;
+                    this.ctx.strokeStyle = `rgba(47, 129, 247, ${opacity * 0.15})`; // GitHub Blue with low opacity
                     this.ctx.lineWidth = 1;
                     this.ctx.beginPath();
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
