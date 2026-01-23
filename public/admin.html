@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --panel: #18181b;
+            --primary: #22d3ee;
+            --text: #fafafa;
+            --text-dim: #a1a1aa;
+            --border: #27272a;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 { margin-top: 0; color: var(--primary); font-family: 'Roboto Mono', monospace; }
+        input, textarea, select {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--border);
+            color: white;
+            padding: 0.8rem;
+            margin: 0.5rem 0 1.5rem;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            background: var(--primary);
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .dashboard { display: none; }
+        .project-item {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-overlay" id="loginOverlay">
+        <div class="card">
+            <h2><i class="ri-lock-line"></i> Admin Access</h2>
+            <p style="color: var(--text-dim)">Knowledge is power. Guard it.</p>
+            <input type="password" id="adminPassword" placeholder="Enter session key...">
+            <button onclick="login()">Authenticate</button>
+            <p id="loginError" style="color: #ef4444; margin-top: 1rem; display: none;"></p>
+        </div>
+    </div>
+
+    <div class="container dashboard" id="dashboard">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2>Admin Terminal</h2>
+            <button style="width: auto;" onclick="logout()">Logout</button>
+        </header>
+
+        <section class="card" style="max-width: none; margin-bottom: 2rem;">
+            <h3>Append New Project</h3>
+            <label>Title</label>
+            <input type="text" id="pTitle" placeholder="Kernel Hooking Tool">
+            <label>Description</label>
+            <textarea id="pDesc" rows="3"></textarea>
+            <label>Category</label>
+            <input type="text" id="pCat" placeholder="Systems Security">
+            <label>Tags (comma separated)</label>
+            <input type="text" id="pTags" placeholder="C, x86, Linux">
+            <label>Link</label>
+            <input type="text" id="pLink" placeholder="https://github.com/...">
+            <button onclick="addProject()">Deploy to Portfolio</button>
+        </section>
+
+        <h3>Active Projects</h3>
+        <div id="projectList"></div>
+    </div>
+
+    <script>
+        async function login() {
+            const password = document.getElementById('adminPassword').value;
+            const res = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                localStorage.setItem('admin_token', data.token);
+                showDashboard();
+            } else {
+                document.getElementById('loginError').textContent = data.message;
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('admin_token');
+            location.reload();
+        }
+
+        function showDashboard() {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            loadProjects();
+        }
+
+        async function loadProjects() {
+            const res = await fetch('/api/data');
+            const data = await res.json();
+            const list = document.getElementById('projectList');
+            list.innerHTML = data.projects.map(p => `
+                <div class="project-item">
+                    <div>
+                        <strong>${p.title}</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-dim)">${p.category}</div>
+                    </div>
+                    <i class="ri-delete-bin-line" style="color: #ef4444; cursor: pointer;"></i>
+                </div>
+            `).join('');
+        }
+
+        async function addProject() {
+            const project = {
+                title: document.getElementById('pTitle').value,
+                description: document.getElementById('pDesc').value,
+                category: document.getElementById('pCat').value,
+                tags: document.getElementById('pTags').value.split(',').map(t => t.trim()),
+                link: document.getElementById('pLink').value
+            };
+            const res = await fetch('/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(project)
+            });
+            if (res.ok) {
+                loadProjects();
+                // Clear form
+                document.querySelectorAll('input, textarea').forEach(i => i.value = '');
+            }
+        }
+
+        if (localStorage.getItem('admin_token')) {
+            showDashboard();
+        }
+    </script>
+</body>
+</html>

@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pharel's personal portfolio showcasing projects, experience, and contact information.">
+  <meta name="description"
+    content="Pharel's personal portfolio showcasing projects, experience, and contact information.">
   <meta name="author" content="Pharel" />
   <link rel="canonical" href="https://www.pharel.dev/" />
   <title>Lembou Pharel | Backend Developer & Cybersecurity Engineer</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --primary: #22d3ee;
       --secondary: #f97316;
-      --bg-dark: #0f172a;
-      --bg-panel: #1e293b;
-      --text-light: #e5e7eb;
-      --text-dim: #9ca3af;
+      --bg-dark: #09090b;
+      --bg-panel: #18181b;
+      --text-light: #fafafa;
+      --text-dim: #a1a1aa;
+      --border: #27272a;
+      --code-bg: #000000;
     }
 
     * {
@@ -28,22 +34,22 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg-dark);
       color: var(--text-light);
       overflow-x: hidden;
+      line-height: 1.5;
     }
 
-    /* Animated Background */
+    /* Technical Background */
     .animated-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      z-index: -1;
+      background: radial-gradient(circle at 50% 50%, #1e1e2e 0%, #09090b 100%);
     }
 
     .grid-overlay {
@@ -51,54 +57,9 @@
       width: 100%;
       height: 100%;
       background-image:
-        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-
-    .particle {
-      position: absolute;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: particleFloat linear infinite;
-    }
-
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-    }
-
-    .hex-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hexagon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      opacity: 0.1;
-      animation: hexFloat linear infinite;
-    }
-
-    @keyframes hexFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-
-    .hexagon::before {
-      content: '⬡';
-      font-size: 60px;
-      color: var(--primary);
+        linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
     /* Top Bar */
@@ -107,10 +68,10 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 70px;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+      height: 64px;
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -118,204 +79,110 @@
       justify-content: space-between;
     }
 
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .menu-toggle {
-      background: rgba(34, 211, 238, 0.1);
-      border: 2px solid var(--primary);
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(34, 211, 238, 0.2);
-      box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    .menu-toggle:hover span {
-      background: #06b6d4;
-      box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-      /*transform: rotate(45deg) translateY(8px);*/
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 1;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-      /*transform: rotate(-45deg) translateY(-8px);*/
-    }
-
     .topbar-brand {
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.3rem;
+      font-size: 1rem;
+      letter-spacing: -0.5px;
       font-weight: 700;
-      color: var(--primary);
-      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: var(--bg-dark);
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: all 0.3s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .nav-cta:hover {
-      background: #06b6d4;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 70px;
-      width: 280px;
-      height: calc(100vh - 70px);
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-right: 1px solid rgba(34, 211, 238, 0.2);
-      z-index: 999;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar.collapsed {
-      transform: translateX(-100%);
-    }
-
-    .nav-links {
-      list-style: none;
-      padding: 2rem 0;
-      flex: 1;
-    }
-
-    .nav-links li {
-      margin: 0;
-    }
-
-    .nav-links a {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 2rem;
       color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      border-left: 3px solid transparent;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: rgba(34, 211, 238, 0.1);
-      border-left-color: var(--primary);
+    .topbar-brand span {
       color: var(--primary);
-    }
-
-    .nav-links a i {
-      font-size: 1.2rem;
-      width: 24px;
-    }
-
-    .sidebar-footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(34, 211, 238, 0.2);
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      text-align: center;
     }
 
     /* Hero Section */
     .hero {
-      position: relative;
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6rem 2rem 4rem;
-      z-index: 1;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
-      margin-bottom: 0 !important;
-      padding-bottom: 0 !important;
+      padding-top: 120px;
+      padding-bottom: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
 
-    .hero-container {
-      max-width: 1200px;
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-      flex-wrap: wrap;
+    .terminal-container {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      font-family: 'Roboto Mono', monospace;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3rem;
     }
 
-    .hero-content {
-      flex: 1;
-      min-width: 300px;
+    .terminal-header {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot.red {
+      background: #ff5f56;
+    }
+
+    .dot.yellow {
+      background: #ffbd2e;
+    }
+
+    .dot.green {
+      background: #27c93f;
     }
 
     .hero-title {
       font-size: 3.5rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--primary), #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      letter-spacing: -2px;
     }
 
     .hero-subtitle {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       color: var(--text-dim);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
       margin-bottom: 1.5rem;
     }
 
-    .hero-description {
-      font-size: 1.1rem;
-      color: var(--text-dim);
-      margin-bottom: 2rem;
-      line-height: 1.8;
+    .pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+      }
     }
 
     .hero-buttons {
@@ -410,8 +277,15 @@
     }
 
     @keyframes profilePulse {
-      0%, 100% { box-shadow: 0 0 60px rgba(34, 211, 238, 0.5); }
-      50% { box-shadow: 0 0 80px rgba(168, 85, 247, 0.6); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 0 80px rgba(168, 85, 247, 0.6);
+      }
     }
 
     /* Section Styles */
@@ -699,6 +573,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Animated Background -->
   <div class="animated-bg">
@@ -743,7 +618,8 @@
         <h1 class="hero-title">Hi, I'm Lembou Pharel</h1>
         <p class="hero-subtitle">Backend Developer | Cybersecurity Engineer</p>
         <p class="hero-description">
-          I specialize in building robust, secure backend systems and solving real-world problems with scalable technology.
+          I specialize in building robust, secure backend systems and solving real-world problems with scalable
+          technology.
           Passionate about engineering reliable software that makes a difference.
         </p>
         <div class="hero-buttons">
@@ -783,19 +659,23 @@
       <div class="cards-grid">
         <div class="card">
           <h4><i class="ri-code-line"></i> Web Development</h4>
-          <p>HTML, CSS, JavaScript, MySQL, NodeJS, Firebase, PostgreSQL, SQLite — frontend & backend development with modern frameworks and best practices.</p>
+          <p>HTML, CSS, JavaScript, MySQL, NodeJS, Firebase, PostgreSQL, SQLite — frontend & backend development with
+            modern frameworks and best practices.</p>
         </div>
         <div class="card">
           <h4><i class="ri-shield-keyhole-line"></i> Network Security</h4>
-          <p>Monitor network traffic using Wireshark, conduct vulnerability assessments with tools like Nmap, and secure network infrastructure against threats.</p>
+          <p>Monitor network traffic using Wireshark, conduct vulnerability assessments with tools like Nmap, and secure
+            network infrastructure against threats.</p>
         </div>
         <div class="card">
           <h4><i class="ri-robot-line"></i> Systems Programming</h4>
-          <p>Write low-level code, networking stacks, memory management, I/O and device interfacing for optimal performance.</p>
+          <p>Write low-level code, networking stacks, memory management, I/O and device interfacing for optimal
+            performance.</p>
         </div>
         <div class="card">
           <h4><i class="ri-tools-fill"></i> Reverse Engineering</h4>
-          <p>Analyzing compiled programs (binary) to understand behavior, logic, data formats, protocols, or vulnerabilities when source code is not available.</p>
+          <p>Analyzing compiled programs (binary) to understand behavior, logic, data formats, protocols, or
+            vulnerabilities when source code is not available.</p>
         </div>
       </div>
     </div>
@@ -807,13 +687,13 @@
       <h2 class="section-header">My Development Setup</h2>
       <div class="setup-box">
         <div class="ascii-art">
-     .--.
-    |o_o |
-    |:_/ |
-   //   \ \
-  (|     | )
-  /'\_   _/`\
-  \___)=(___/
+          .--.
+          |o_o |
+          |:_/ |
+          // \ \
+          (| | )
+          /'\_ _/`\
+          \___)=(___/
         </div>
         <div class="setup-grid">
           <div class="setup-item"><strong>User:</strong> pharel@archlinux</div>
@@ -950,9 +830,9 @@
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 968 &&
-          sidebar.classList.contains('active') &&
-          !sidebar.contains(e.target) &&
-          !menuToggle.contains(e.target)) {
+        sidebar.classList.contains('active') &&
+        !sidebar.contains(e.target) &&
+        !menuToggle.contains(e.target)) {
         sidebar.classList.remove('active');
         menuToggle.classList.remove('active');
       }

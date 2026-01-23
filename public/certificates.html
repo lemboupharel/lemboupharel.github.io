@@ -1,113 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificates | Lembou Pharel</title>
-  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <title>Certificates | LEMBOU.SYS</title>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@400;700;800&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --primary: #22d3ee;
-      --secondary: #f97316;
-      --bg-dark: #0f172a;
-      --bg-panel: #1e293b;
-      --text-light: #e5e7eb;
-      --text-dim: #9ca3af;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      --bg-dark: #09090b;
+      --bg-panel: #18181b;
+      --text-light: #fafafa;
+      --text-dim: #a1a1aa;
+      --border: #27272a;
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg-dark);
       color: var(--text-light);
-      overflow-x: hidden;
+      margin: 0;
+      line-height: 1.5;
     }
 
-    /* Animated Background */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-    }
-
-    .grid-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-
-    .particle {
-      position: absolute;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: particleFloat linear infinite;
-    }
-
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-    }
-
-    .hex-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hexagon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      opacity: 0.1;
-      animation: hexFloat linear infinite;
-    }
-
-    @keyframes hexFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-
-    .hexagon::before {
-      content: '⬡';
-      font-size: 60px;
-      color: var(--primary);
-    }
-
-    /* Top Bar */
     .topbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 70px;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+      height: 64px;
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -115,436 +43,113 @@
       justify-content: space-between;
     }
 
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .menu-toggle {
-      background: rgba(34, 211, 238, 0.1);
-      border: 2px solid var(--primary);
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(34, 211, 238, 0.2);
-      box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    .menu-toggle:hover span {
-      background: #06b6d4;
-      box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 1;
-    }
-
-
     .topbar-brand {
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.3rem;
       font-weight: 700;
-      color: var(--primary);
-      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
     }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: var(--bg-dark);
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: all 0.3s;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .nav-cta:hover {
-      background: #06b6d4;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 70px;
-      width: 280px;
-      height: calc(100vh - 70px);
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-right: 1px solid rgba(34, 211, 238, 0.2);
-      z-index: 999;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar.collapsed {
-      transform: translateX(-100%);
-    }
-
-    .nav-links {
-      list-style: none;
-      padding: 2rem 0;
-      flex: 1;
-    }
-
-    .nav-links li {
-      margin: 0;
-    }
-
-    .nav-links a {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 2rem;
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      border-left: 3px solid transparent;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: rgba(34, 211, 238, 0.1);
-      border-left-color: var(--primary);
+    .topbar-brand span {
       color: var(--primary);
     }
 
-    .nav-links a i {
-      font-size: 1.2rem;
-      width: 24px;
-    }
-
-    .sidebar-footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(34, 211, 238, 0.2);
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      text-align: center;
-    }
-
-    /* Certificates Section */
-    .section {
-      position: relative;
-      padding: 5rem 2rem;
-      z-index: 1;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-
-    .section-container {
-      max-width: 1200px;
+    .container {
+      max-width: 1100px;
       margin: 0 auto;
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 4rem;
-      box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
-      border: 1px solid rgba(34, 211, 238, 0.2);
+      padding: 120px 2rem 60px;
     }
 
-    .section-header {
-      font-size: 2.5rem;
-      text-align: center;
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -2px;
       margin-bottom: 1rem;
-      color: var(--primary);
-      font-weight: 700;
     }
 
-    .section-description {
-      text-align: center;
+    .subtitle {
       color: var(--text-dim);
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      font-size: 1.1rem;
-      line-height: 1.8;
+      font-family: 'Roboto Mono', monospace;
+      margin-bottom: 3rem;
     }
 
-    /* Certificate Cards */
-    .certificate-list {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
-      margin-top: 3rem;
     }
 
-    .certificate-card {
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(34, 211, 238, 0.2);
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-
-    .certificate-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(255, 255, 255, 0.06));
-      border-color: var(--primary);
-    }
-
-    .certificate-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .certificate-card-body {
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
       padding: 1.5rem;
-    }
-
-    .certificate-card-body h4 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .certificate-card-body p {
-      color: var(--text-dim);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--secondary);
-      color: white;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
+      border-radius: 12px;
       transition: all 0.3s;
-      font-size: 0.95rem;
+      display: block;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .download-btn:hover {
-      background: #ea580c;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
-      color: white;
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
     }
 
-    .download-btn i {
+    .card h3 {
+      margin: 0.5rem 0;
+      color: var(--primary);
+      font-family: 'Roboto Mono', monospace;
       font-size: 1.1rem;
     }
 
-    /* Responsive */
-    @media (max-width: 968px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .section {
-        margin-left: 0;
-        padding-top: 100px;
-      }
-
-      .topbar {
-        padding: 0 1rem;
-      }
-
-      .section-container {
-        padding: 2rem;
-      }
-
-      .section-header {
-        font-size: 2rem;
-      }
-
-      .certificate-list {
-        grid-template-columns: 1fr;
-      }
+    .card .issuer {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-family: 'Roboto Mono', monospace;
     }
   </style>
-
 </head>
-<body>
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="grid-overlay"></div>
-    <div class="hex-container" id="hexagons"></div>
-    <div id="particles"></div>
-  </div>
 
-  <!-- Top Bar -->
+<body>
   <header class="topbar">
-    <div class="topbar-left">
-      <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="topbar-brand">LEMBOU PHAREL</div>
-    </div>
-    <div class="topbar-right">
-      <a href="contact" class="nav-cta">Contact</a>
-    </div>
+    <div class="topbar-brand">LEMBOU.<span>SYS</span></div>
+    <nav style="display: flex; gap: 2rem;">
+      <a href="/" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Home</a>
+      <a href="/projects" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Projects</a>
+      <a href="/certificates"
+        style="color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500;">Certs</a>
+      <a href="/contact" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Contact</a>
+    </nav>
   </header>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <ul class="nav-links">
-      <li><a href="/"><i class="ri-home-line"></i> Home</a></li>
-      <li><a href="/projects"><i class="ri-code-box-line"></i> Projects</a></li>
-      <li><a href="/certificates" class="active"><i class="ri-award-line"></i> Certificates</a></li>
-      <li><a href="/partners"><i class="ri-shake-hands-line"></i> Partners</a></li>
-      <li><a href="/contact"><i class="ri-mail-send-line"></i> Contact</a></li>
-    </ul>
-    <div class="sidebar-footer">
-      © 2026 Lembou Pharel
+  <div class="container">
+    <div
+      style="font-family: 'Roboto Mono', monospace; color: var(--primary); font-size: 0.8rem; margin-bottom: 0.5rem;">[
+      VALIDATE_CREDENTIALS ]</div>
+    <h1>Certifications</h1>
+    <p class="subtitle">Verified proof of technical competence and continuous learning.</p>
+
+    <div class="grid" id="certGrid">
+      <div style="color: var(--text-dim);">Accessing credential store...</div>
     </div>
-  </aside>
-
-  <!-- Certificates Section -->
-  <section class="section" id="certificates">
-    <div class="section-container">
-      <h2 class="section-header">Certificates</h2>
-      <p class="section-description">
-        Here are some of my professional certifications in web development, cybersecurity, and systems programming. You can view or download them below.
-      </p>
-
-      <div class="certificate-list">
-        <div class="certificate-card">
-          <img src="assets/certif/image/iotcertificate.jpg" alt="IoT Certificate">
-          <div class="certificate-card-body">
-            <h4><i class="ri-signal-tower-line"></i> IoT Wireless & Cloud Computing</h4>
-            <p>Internet of Things (IoT) Wireless & Cloud Computing Emerging Technologies - an online course authorized by Yonsei University and offered through Coursera.</p>
-            <a href="assets/certif/pdf/iotcertificate.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
-            </a>
-          </div>
-        </div>
-
-        <div class="certificate-card">
-          <img src="assets/certif/image/nasa space app.jpg" alt="NASA Space Apps Challenge">
-          <div class="certificate-card-body">
-            <h4><i class="ri-rocket-line"></i> NASA Space Apps Challenge</h4>
-            <p>NASA International Space Apps Challenge certificate for outstanding participation and efforts to address challenges we face on Earth and in space.</p>
-            <a href="assets/certif/pdf/nasa space app.pdf" download class="download-btn">
-              <i class="ri-download-line"></i> Download Certificate
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <script>
-    // Animated particles
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      const size = Math.random() * 3 + 1;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${15 + Math.random() * 15}s`;
-      particle.style.animationDelay = `${Math.random() * 10}s`;
-      particlesContainer.appendChild(particle);
+    async function loadCerts() {
+      const res = await fetch('/api/data');
+      const data = await res.json();
+      const grid = document.getElementById('certGrid');
+
+      grid.innerHTML = data.certificates.map(c => `
+        <a href="${c.link}" target="_blank" class="card">
+          <div class="issuer">${c.issuer} // ${c.date}</div>
+          <h3>${c.title}</h3>
+          <div style="color: var(--primary); font-size: 0.8rem; margin-top: 1rem;">
+            [ VIEW_DOCUMENT ]
+          </div>
+        </a>
+      `).join('');
     }
-
-    // Hexagons
-    const hexContainer = document.getElementById('hexagons');
-    for (let i = 0; i < 8; i++) {
-      const hex = document.createElement('div');
-      hex.className = 'hexagon';
-      hex.style.left = `${Math.random() * 90}vw`;
-      hex.style.top = `${Math.random() * 90}vh`;
-      hex.style.animationDuration = `${30 + Math.random() * 20}s`;
-      hex.style.animationDelay = `${Math.random() * 5}s`;
-      hexContainer.appendChild(hex);
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      
-      if (window.innerWidth > 968) {
-        sidebar.classList.toggle('collapsed');
-        
-        const section = document.querySelector('.section');
-        if (sidebar.classList.contains('collapsed')) {
-          section.style.marginLeft = '0';
-        } else {
-          section.style.marginLeft = '280px';
-        }
-      } else {
-        sidebar.classList.toggle('active');
-      }
-    });
-
-    // Close sidebar on mobile when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 968) {
-          sidebar.classList.remove('active');
-          menuToggle.classList.remove('active');
-        }
-      });
-    });
-
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 968 && 
-          sidebar.classList.contains('active') && 
-          !sidebar.contains(e.target) && 
-          !menuToggle.contains(e.target)) {
-        sidebar.classList.remove('active');
-        menuToggle.classList.remove('active');
-      }
-    });
+    loadCerts();
   </script>
 </body>
+
 </html>
