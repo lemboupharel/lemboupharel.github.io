@@ -1,119 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Portfolio</title>
+    <title>Admin Terminal | LEMBOU.SYS</title>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #09090b;
-            --panel: #18181b;
-            --primary: #22d3ee;
-            --text: #fafafa;
-            --text-dim: #a1a1aa;
-            --border: #27272a;
-        }
-        body {
-            background: var(--bg);
+        input,
+        textarea,
+        select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--border);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 2rem;
+            padding: 0.8rem;
+            margin: 0.4rem 0 1.2rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
         }
+
+        label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
         .login-overlay {
             position: fixed;
             inset: 0;
-            background: var(--bg);
+            background: var(--bg-solid);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 2000;
         }
-        .card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            padding: 2rem;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 400px;
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
         }
-        h2 { margin-top: 0; color: var(--primary); font-family: 'Roboto Mono', monospace; }
-        input, textarea, select {
-            width: 100%;
-            background: #000;
-            border: 1px solid var(--border);
-            color: white;
-            padding: 0.8rem;
-            margin: 0.5rem 0 1.5rem;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-        button {
-            background: var(--primary);
-            color: #000;
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
             cursor: pointer;
-            width: 100%;
+            transition: var(--transition-fast);
+            font-weight: 600;
         }
-        .dashboard { display: none; }
-        .project-item {
+
+        .tab:hover {
+            color: var(--text);
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .item-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .item-card {
             background: var(--panel);
             border: 1px solid var(--border);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 1.25rem;
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
+            transition: var(--transition);
+        }
+
+        .item-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            padding: 0.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            color: var(--text-dim);
+        }
+
+        .icon-btn:hover {
+            background: var(--panel-hover);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .icon-btn.delete:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
             align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-solid);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
+
 <body>
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Login Overlay -->
     <div class="login-overlay" id="loginOverlay">
-        <div class="card">
-            <h2><i class="ri-lock-line"></i> Admin Access</h2>
-            <p style="color: var(--text-dim)">Knowledge is power. Guard it.</p>
-            <input type="password" id="adminPassword" placeholder="Enter session key...">
-            <button onclick="login()">Authenticate</button>
-            <p id="loginError" style="color: #ef4444; margin-top: 1rem; display: none;"></p>
+        <div class="card" style="width: 100%; max-width: 400px;">
+            <div class="label-mono">[ ACCESS_CONTROL ]</div>
+            <h2 style="margin: 1rem 0; font-weight: 800;">Authenticate</h2>
+            <label>SESSION_KEY</label>
+            <input type="password" id="adminPassword" placeholder="••••••••">
+            <button class="btn btn-primary" style="width: 100%;" onclick="login()">AUTHORIZE</button>
+            <div id="loginError" style="color: #ef4444; margin-top: 1rem; font-size: 0.8rem; display: none;">
+            </div>
         </div>
     </div>
 
-    <div class="container dashboard" id="dashboard">
-        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-            <h2>Admin Terminal</h2>
-            <button style="width: auto;" onclick="logout()">Logout</button>
-        </header>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button id="menuToggle"
+                    style="background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem; border-radius: 4px; display: none; cursor: pointer;">
+                    <i class="ri-menu-line"></i>
+                </button>
+                <a href="/" class="brand">LEMBOU<span>.SYS</span></a>
+            </div>
+            <button class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.7rem;"
+                onclick="logout()">LOGOUT</button>
+        </div>
+    </nav>
 
-        <section class="card" style="max-width: none; margin-bottom: 2rem;">
-            <h3>Append New Project</h3>
-            <label>Title</label>
-            <input type="text" id="pTitle" placeholder="Kernel Hooking Tool">
-            <label>Description</label>
-            <textarea id="pDesc" rows="3"></textarea>
-            <label>Category</label>
-            <input type="text" id="pCat" placeholder="Systems Security">
-            <label>Tags (comma separated)</label>
-            <input type="text" id="pTags" placeholder="C, x86, Linux">
-            <label>Link</label>
-            <input type="text" id="pLink" placeholder="https://github.com/...">
-            <button onclick="addProject()">Deploy to Portfolio</button>
-        </section>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-links">
+            <a href="/" class="sidebar-link"><i class="ri-home-line"></i> Home</a>
+            <a href="/projects" class="sidebar-link"><i class="ri-code-box-line"></i> Projects</a>
+            <a href="/certificates" class="sidebar-link"><i class="ri-award-line"></i> Certificates</a>
+            <a href="/partners" class="sidebar-link"><i class="ri-shake-hands-line"></i> Partners</a>
+            <a href="/contact" class="sidebar-link"><i class="ri-mail-send-line"></i> Contact</a>
+            <a href="/admin" class="sidebar-link active"><i class="ri-settings-line"></i> Admin</a>
+        </div>
+    </aside>
 
-        <h3>Active Projects</h3>
-        <div id="projectList"></div>
+    <!-- Dashboard -->
+    <main class="main-content" style="display: none;" id="dashboard">
+        <div class="container animate-fade" style="max-width: 1200px;">
+            <div class="label-mono">[ ROOT_ACCESS_GRANTED ]</div>
+            <h1 style="margin-bottom: 2rem;">Content Management</h1>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('projects')">
+                    <i class="ri-code-box-line"></i> Projects
+                </button>
+                <button class="tab" onclick="switchTab('certificates')">
+                    <i class="ri-award-line"></i> Certificates
+                </button>
+                <button class="tab" onclick="switchTab('partners')">
+                    <i class="ri-shake-hands-line"></i> Partners
+                </button>
+                <button class="tab" onclick="switchTab('signals')">
+                    <i class="ri-signal-tower-line"></i> Signals
+                </button>
+            </div>
+
+            <!-- Projects Tab -->
+            <div class="tab-content active" id="projects-content">
+                <button class="btn btn-primary" onclick="openAddModal('project')" style="margin-bottom: 2rem;">
+                    <i class="ri-add-line"></i> Add Project
+                </button>
+                <div class="item-list" id="projectsList"></div>
+            </div>
+
+            <!-- Certificates Tab -->
+            <div class="tab-content" id="certificates-content">
+                <button class="btn btn-primary" onclick="openAddModal('certificate')" style="margin-bottom: 2rem;">
+                    <i class="ri-add-line"></i> Add Certificate
+                </button>
+                <div class="item-list" id="certificatesList"></div>
+            </div>
+
+            <!-- Partners Tab -->
+            <div class="tab-content" id="partners-content">
+                <button class="btn btn-primary" onclick="openAddModal('partner')" style="margin-bottom: 2rem;">
+                    <i class="ri-add-line"></i> Add Partner
+                </button>
+                <div class="item-list" id="partnersList"></div>
+            </div>
+
+            <!-- Signals Tab -->
+            <div class="tab-content" id="signals-content">
+                <div class="label-mono" style="margin-bottom: 1rem;">INCOMING_TRANSMISSIONS</div>
+                <div class="item-list" id="signalsList"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit/Add Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="margin-bottom: 2rem;">Edit Item</h2>
+            <div id="modalForm"></div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="saveItem()">Save</button>
+                <button class="btn btn-outline" style="flex: 1;" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
     </div>
 
+    <script src="js/particles.js"></script>
     <script>
+        let currentType = null;
+        let editingId = null;
+        let allData = { projects: [], certificates: [], partners: [] };
+
+        // Login
         async function login() {
             const password = document.getElementById('adminPassword').value;
             const res = await fetch('/api/admin/login', {
@@ -126,8 +294,9 @@
                 localStorage.setItem('admin_token', data.token);
                 showDashboard();
             } else {
-                document.getElementById('loginError').textContent = data.message;
-                document.getElementById('loginError').style.display = 'block';
+                const err = document.getElementById('loginError');
+                err.textContent = "AUTH_FAILURE: " + data.message;
+                err.style.display = 'block';
             }
         }
 
@@ -139,47 +308,272 @@
         function showDashboard() {
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
-            loadProjects();
+            loadAllData();
         }
 
-        async function loadProjects() {
+        // Load all data
+        async function loadAllData() {
             const res = await fetch('/api/data');
-            const data = await res.json();
-            const list = document.getElementById('projectList');
-            list.innerHTML = data.projects.map(p => `
-                <div class="project-item">
-                    <div>
-                        <strong>${p.title}</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-dim)">${p.category}</div>
+            allData = await res.json();
+            if (!allData.partners) allData.partners = [];
+            if (!allData.signals) allData.signals = [];
+            renderProjects();
+            renderCertificates();
+            renderPartners();
+            renderSignals();
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.closest('.tab').classList.add('active');
+            document.getElementById(`${tab}-content`).classList.add('active');
+        }
+
+        // Render functions
+        function renderProjects() {
+            const list = document.getElementById('projectsList');
+            list.innerHTML = allData.projects.map(p => `
+                <div class="item-card">
+                    <div style="flex: 1;">
+                        <div class="label-mono" style="font-size: 0.65rem;">${p.category}</div>
+                        <h3 style="margin: 0.5rem 0; color: var(--primary);">${p.title}</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem;">${p.description}</p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
                     </div>
-                    <i class="ri-delete-bin-line" style="color: #ef4444; cursor: pointer;"></i>
+                    <div class="item-actions">
+                        <button class="icon-btn" onclick="openEditModal('project', '${p.id}')">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="icon-btn delete" onclick="deleteItem('project', '${p.id}')">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
         }
 
-        async function addProject() {
-            const project = {
-                title: document.getElementById('pTitle').value,
-                description: document.getElementById('pDesc').value,
-                category: document.getElementById('pCat').value,
-                tags: document.getElementById('pTags').value.split(',').map(t => t.trim()),
-                link: document.getElementById('pLink').value
-            };
-            const res = await fetch('/api/projects', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(project)
-            });
-            if (res.ok) {
-                loadProjects();
-                // Clear form
-                document.querySelectorAll('input, textarea').forEach(i => i.value = '');
+        function renderCertificates() {
+            const list = document.getElementById('certificatesList');
+            list.innerHTML = allData.certificates.map(c => `
+                <div class="item-card">
+                    <div style="flex: 1;">
+                        <div class="label-mono" style="font-size: 0.65rem;">${c.issuer} • ${c.date}</div>
+                        <h3 style="margin: 0.5rem 0; color: var(--primary);">${c.title}</h3>
+                    </div>
+                    <div class="item-actions">
+                        <button class="icon-btn" onclick="openEditModal('certificate', '${c.id}')">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="icon-btn delete" onclick="deleteItem('certificate', '${c.id}')">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPartners() {
+            const list = document.getElementById('partnersList');
+            if (!allData.partners || allData.partners.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-dim); font-family: var(--font-mono);">No partners yet. Add one to get started.</p>';
+                return;
+            }
+            list.innerHTML = allData.partners.map(p => `
+                <div class="item-card">
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: var(--primary);">${p.name}</h3>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">${p.description || ''}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="icon-btn" onclick="openEditModal('partner', '${p.id}')">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="icon-btn delete" onclick="deleteItem('partner', '${p.id}')">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSignals() {
+            const list = document.getElementById('signalsList');
+            if (!allData.signals || allData.signals.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-dim); font-family: var(--font-mono);">No active signals detected.</p>';
+                return;
+            }
+            // Sort by date new to old
+            const sortedSignals = [...allData.signals].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            list.innerHTML = sortedSignals.map(s => `
+                <div class="item-card" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div class="label-mono" style="font-size: 0.65rem;">${new Date(s.date).toLocaleString()}</div>
+                            <h3 style="margin: 0.5rem 0; color: var(--primary);">${s.name}</h3>
+                            <div style="color: var(--text-dim); font-size: 0.8rem; font-family: var(--font-mono);">${s.email}</div>
+                        </div>
+                        <button class="icon-btn delete" onclick="deleteItem('signal', '${s.id}')">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
+                    </div>
+                    <p style="color: var(--text); font-size: 0.95rem; line-height: 1.5; background: rgba(0,0,0,0.03); padding: 1rem; border-radius: 8px;">
+                        ${s.message}
+                    </p>
+                </div>
+            `).join('');
+        }
+
+        // Modal functions
+        function openAddModal(type) {
+            currentType = type;
+            editingId = null;
+            document.getElementById('modalTitle').textContent = `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            renderModalForm(type);
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function openEditModal(type, id) {
+            currentType = type;
+            editingId = id;
+            const item = allData[type + 's'].find(i => i.id === id);
+            document.getElementById('modalTitle').textContent = `Edit ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            renderModalForm(type, item);
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('active');
+            currentType = null;
+            editingId = null;
+        }
+
+        function renderModalForm(type, item = {}) {
+            const form = document.getElementById('modalForm');
+
+            if (type === 'project') {
+                form.innerHTML = `
+                    <label>Title</label>
+                    <input type="text" id="field-title" value="${item.title || ''}" placeholder="Project title">
+                    
+                    <label>Description</label>
+                    <textarea id="field-description" rows="4" placeholder="Project description">${item.description || ''}</textarea>
+                    
+                    <label>Category</label>
+                    <input type="text" id="field-category" value="${item.category || ''}" placeholder="e.g., Systems Programming">
+                    
+                    <label>Tags (comma-separated)</label>
+                    <input type="text" id="field-tags" value="${item.tags ? item.tags.join(', ') : ''}" placeholder="C, Linux, Kernel">
+                    
+                    <label>GitHub Link</label>
+                    <input type="text" id="field-link" value="${item.link || ''}" placeholder="https://github.com/...">
+                `;
+            } else if (type === 'certificate') {
+                form.innerHTML = `
+                    <label>Title</label>
+                    <input type="text" id="field-title" value="${item.title || ''}" placeholder="Certificate name">
+                    
+                    <label>Issuer</label>
+                    <input type="text" id="field-issuer" value="${item.issuer || ''}" placeholder="Issuing organization">
+                    
+                    <label>Date</label>
+                    <input type="text" id="field-date" value="${item.date || ''}" placeholder="2024">
+                    
+                    <label>Verification Link</label>
+                    <input type="text" id="field-link" value="${item.link || ''}" placeholder="https://...">
+                `;
+            } else if (type === 'partner') {
+                form.innerHTML = `
+                    <label>Name</label>
+                    <input type="text" id="field-name" value="${item.name || ''}" placeholder="Partner name">
+                    
+                    <label>Description</label>
+                    <textarea id="field-description" rows="3" placeholder="Brief description">${item.description || ''}</textarea>
+                    
+                    <label>Website (optional)</label>
+                    <input type="text" id="field-website" value="${item.website || ''}" placeholder="https://...">
+                `;
             }
         }
 
+        async function saveItem() {
+            let data = {};
+
+            if (currentType === 'project') {
+                data = {
+                    title: document.getElementById('field-title').value,
+                    description: document.getElementById('field-description').value,
+                    category: document.getElementById('field-category').value,
+                    tags: document.getElementById('field-tags').value.split(',').map(t => t.trim()),
+                    link: document.getElementById('field-link').value
+                };
+            } else if (currentType === 'certificate') {
+                data = {
+                    title: document.getElementById('field-title').value,
+                    issuer: document.getElementById('field-issuer').value,
+                    date: document.getElementById('field-date').value,
+                    link: document.getElementById('field-link').value
+                };
+            } else if (currentType === 'partner') {
+                data = {
+                    name: document.getElementById('field-name').value,
+                    description: document.getElementById('field-description').value,
+                    website: document.getElementById('field-website').value
+                };
+            }
+
+            const url = editingId
+                ? `/api/${currentType}s/${editingId}`
+                : `/api/${currentType}s`;
+            const method = editingId ? 'PUT' : 'POST';
+
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                closeModal();
+                loadAllData();
+            }
+        }
+
+        async function deleteItem(type, id) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+
+            try {
+                const res = await fetch(`/api/${type}s/${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    await loadAllData(); // Reload data to refresh display
+                } else {
+                    const error = await res.json();
+                    alert('Error deleting: ' + (error.error || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error('Delete error:', err);
+                alert('Failed to delete. Check console for details.');
+            }
+        }
+
+        // Menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+        }
+
+        // Auto-login if token exists
         if (localStorage.getItem('admin_token')) {
             showDashboard();
         }
     </script>
 </body>
+
 </html>

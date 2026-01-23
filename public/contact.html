@@ -1,718 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Lembou Pharel</title>
+  <title>Contact | LEMBOU.SYS</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  
   <style>
-    :root {
-      --primary: #22d3ee;
-      --secondary: #f97316;
-      --bg-dark: #0f172a;
-      --bg-panel: #1e293b;
-      --text-light: #e5e7eb;
-      --text-dim: #9ca3af;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
-
-    /* Animated Background */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
+    input,
+    textarea {
       width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-    }
-
-    .grid-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-
-    .particle {
-      position: absolute;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: particleFloat linear infinite;
-    }
-
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-    }
-
-    .hex-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hexagon {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      opacity: 0.1;
-      animation: hexFloat linear infinite;
-    }
-
-    @keyframes hexFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-
-    .hexagon::before {
-      content: '⬡';
-      font-size: 60px;
-      color: var(--primary);
-    }
-
-    /* Top Bar */
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 70px;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      justify-content: space-between;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .menu-toggle {
-      background: rgba(34, 211, 238, 0.1);
-      border: 2px solid var(--primary);
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(34, 211, 238, 0.2);
-      box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-    }
-
-    .menu-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    .menu-toggle:hover span {
-      background: #06b6d4;
-      box-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 1;
-    }
-
-    .topbar-brand {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .nav-cta {
-      background: var(--primary);
-      color: var(--bg-dark);
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: all 0.3s;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .nav-cta:hover {
-      background: #06b6d4;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
-    }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 70px;
-      width: 280px;
-      height: calc(100vh - 70px);
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(12px);
-      border-right: 1px solid rgba(34, 211, 238, 0.2);
-      z-index: 999;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar.collapsed {
-      transform: translateX(-100%);
-    }
-
-    .nav-links {
-      list-style: none;
-      padding: 2rem 0;
-      flex: 1;
-    }
-
-    .nav-links li {
-      margin: 0;
-    }
-
-    .nav-links a {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 2rem;
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      border-left: 3px solid transparent;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: rgba(34, 211, 238, 0.1);
-      border-left-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .nav-links a i {
-      font-size: 1.2rem;
-      width: 24px;
-    }
-
-    .sidebar-footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(34, 211, 238, 0.2);
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      text-align: center;
-    }
-
-    /* Contact Section */
-    .section {
-      position: relative;
-      padding: 5rem 2rem;
-      z-index: 1;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
-      min-height: 100vh;
-      padding-top: 100px;
-    }
-
-    .section-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 4rem;
-      box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
-      border: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .section-header {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .section-description {
-      text-align: center;
-      color: var(--text-dim);
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    /* Contact Layout */
-    .contact-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      margin-top: 2rem;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .contact-card {
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(34, 211, 238, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
-      border-color: var(--primary);
-    }
-
-    .contact-card h3 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .contact-card h3 i {
-      font-size: 1.5rem;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(34, 211, 238, 0.1);
-    }
-
-    .contact-item:last-child {
-      border-bottom: none;
-    }
-
-    .contact-item i {
-      color: var(--primary);
-      font-size: 1.2rem;
-      width: 24px;
-    }
-
-    .contact-item a {
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .contact-item a:hover {
-      color: var(--primary);
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .action-card {
-      background: linear-gradient(145deg, rgba(249, 115, 22, 0.1), rgba(255, 255, 255, 0.03));
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(249, 115, 22, 0.2);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .action-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.2);
-      border-color: var(--secondary);
-    }
-
-    .action-card h3 {
-      color: var(--secondary);
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .action-card p {
-      color: var(--text-dim);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s;
-      width: 100%;
-      margin-bottom: 0.5rem;
-    }
-
-    .primary-btn {
-      background: var(--primary);
-      color: var(--bg-dark);
-    }
-
-    .primary-btn:hover {
-      background: #06b6d4;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(34, 211, 238, 0.4);
-    }
-
-    .secondary-btn {
-      background: var(--secondary);
+      background: #000;
+      border: 1px solid var(--border);
       color: white;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
     }
 
-    .secondary-btn:hover {
-      background: #ea580c;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
-    }
-
-    .copy-btn {
-      background: transparent;
-      color: var(--text-dim);
-      border: 1px solid rgba(34, 211, 238, 0.3);
-      font-size: 0.85rem;
-      padding: 0.4rem 0.8rem;
-    }
-
-    .copy-btn:hover {
-      background: rgba(34, 211, 238, 0.1);
-      color: var(--primary);
-    }
-
-    .copy-notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: var(--bg-dark);
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      box-shadow: 0 5px 15px rgba(34, 211, 238, 0.4);
-      z-index: 1001;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .copy-notification.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .section {
-        margin-left: 0;
-        padding-top: 100px;
-      }
-
-      .topbar {
-        padding: 0 1rem;
-      }
-
-      .section-container {
-        padding: 2rem;
-      }
-
-      .section-header {
-        font-size: 2rem;
-      }
-
-      .contact-content {
-        grid-template-columns: 1fr;
-      }
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
     }
   </style>
 </head>
+
 <body>
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="grid-overlay"></div>
-    <div class="hex-container" id="hexagons"></div>
-    <div id="particles"></div>
-  </div>
+  <canvas id="particleCanvas"></canvas>
 
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="topbar-brand">LEMBOU PHAREL</div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="menuToggle"
+          style="background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem; border-radius: 4px; display: none; cursor: pointer;">
+          <i class="ri-menu-line"></i>
+        </button>
+        <a href="/" class="brand">LEMBOU<span>.SYS</span></a>
+      </div>
+      <div class="nav-links">
+        <a href="/contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">ESTABLISH_LINK</a>
+      </div>
     </div>
-    <div class="topbar-right">
-      <a href="/contact" class="nav-cta">Contact</a>
-    </div>
-  </header>
+  </nav>
 
-  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
-    <ul class="nav-links">
-      <li><a href="/"><i class="ri-home-line"></i> Home</a></li>
-      <li><a href="/projects"><i class="ri-code-box-line"></i> Projects</a></li>
-      <li><a href="/certificates"><i class="ri-award-line"></i> Certificates</a></li>
-      <li><a href="/partners"><i class="ri-shake-hands-line"></i> Partners</a></li>
-      <li><a href="/contact" class="active"><i class="ri-mail-send-line"></i> Contact</a></li>
-    </ul>
-    <div class="sidebar-footer">
-      © 2026 Lembou Pharel
+    <div class="sidebar-links">
+      <a href="/" class="sidebar-link"><i class="ri-home-line"></i> Home</a>
+      <a href="/projects" class="sidebar-link"><i class="ri-code-box-line"></i> Projects</a>
+      <a href="/certificates" class="sidebar-link"><i class="ri-award-line"></i> Certificates</a>
+      <a href="/partners" class="sidebar-link"><i class="ri-shake-hands-line"></i> Partners</a>
+      <a href="/contact" class="sidebar-link active"><i class="ri-mail-send-line"></i> Contact</a>
     </div>
   </aside>
 
-  <!-- Contact Section -->
-  <section class="section" id="contact">
-    <div class="section-container">
-      <h2 class="section-header">Get In Touch</h2>
-      <p class="section-description">
-        Have a question, want to collaborate, or just want to say hello? Feel free to reach out through any of these channels.
+  <main class="main-content">
+    <div class="container animate-fade" style="max-width: 800px;">
+      <div class="label-mono">[ ESTABLISH_COMMUNICATION ]</div>
+      <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-top: 1rem;">Get in Touch</h1>
+      <p style="color: var(--text-dim); margin-bottom: 3rem;">
+        Available for systems architecture, security tooling, and AI research collaborations.
       </p>
 
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-card">
-            <h3><i class="ri-information-line"></i> Contact Information</h3>
-            <div class="contact-details">
-              <div class="contact-item">
-                <i class="ri-mail-line"></i>
-                <div>
-                  <a href="mailto:pharellembou@gmail.com">pharellembou@gmail.com</a>
-                  <button class="copy-btn" data-text="pharellembou@gmail.com">Copy</button>
-                </div>
-              </div>
-              <div class="contact-item">
-                <i class="ri-discord-line"></i>
-                <div>
-                  <span>pharel_lems</span>
-                  <button class="copy-btn" data-text="pharel_lems">Copy</button>
-                </div>
-              </div>
-              <div class="contact-item">
-                <i class="ri-github-line"></i>
-                <div>
-                  <a href="https://github.com/lemboupharel" target="_blank">github.com/lemboupharel</a>
-                  <button class="copy-btn" data-text="github.com/lemboupharel">Copy</button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <form class="card" style="padding: 3rem;" id="signalForm">
+        <label class="label-mono" style="font-size: 0.7rem;">FULL_NAME</label>
+        <input type="text" id="signalName" placeholder="John Doe" required>
 
-          <div class="contact-card">
-            <h3><i class="ri-group-line"></i> Alternative Contact Methods</h3>
-            <div class="contact-details">
-              <div class="contact-item">
-                <i class="ri-discord-line"></i>
-                <a href="https://discord.gg/xTF9KCjMHy" target="_blank">Join Discord Server</a>
-              </div>
-              <div class="contact-item">
-                <i class="ri-github-line"></i>
-                <a href="https://github.com/lemboupharel" target="_blank">GitHub Issues</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <label class="label-mono" style="font-size: 0.7rem;">EMAIL_ADDRESS</label>
+        <input type="email" id="signalEmail" placeholder="john@example.com" required>
 
-        <div class="contact-actions">
-          <div class="action-card">
-            <h3><i class="ri-heart-line"></i> Support My Work</h3>
-            <p>If you find my projects helpful, consider supporting me on Ko-fi!</p>
-            <a href="#" class="action-btn secondary-btn">
-              <i class="ri-cup-line"></i> Support me on Ko-fi
-            </a>
-          </div>
+        <label class="label-mono" style="font-size: 0.7rem;">COMMUNICATION_CONTENT</label>
+        <textarea id="signalMessage" rows="5" placeholder="Your message here..." required></textarea>
 
-          <div class="action-card">
-            <h3><i class="ri-send-plane-line"></i> Send a Message</h3>
-            <p>Click the button below to send me an email directly. This will open your default email client. Optionally copy paste the Email address and get in touch with me manually!</p>
-            <a href="mailto:lemboupharel@gmail.com" class="action-btn primary-btn">
-              <i class="ri-mail-send-line"></i> Send Email
-            </a>
-          </div>
-        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">SEND_SIGNAL</button>
+      </form>
+
+      <div
+        style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+        <a href="mailto:pharellembou@gmail.com" class="card"
+          style="padding: 1.5rem; text-align: center; text-decoration: none; display: block; height: 100%;">
+          <div class="label-mono">DIRECT_MAIL</div>
+          <div style="margin-top: 0.5rem; color: var(--text);">pharellembou@gmail.com</div>
+        </a>
+        <a href="https://wa.me/237672446810?text=Hello%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect."
+          target="_blank" class="card"
+          style="padding: 1.5rem; text-align: center; text-decoration: none; display: block; height: 100%;">
+          <div class="label-mono">SECURE_CHAT (WHATSAPP)</div>
+          <div style="margin-top: 0.5rem; color: var(--text);">+237 672 446 810</div>
+        </a>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- Copy Notification -->
-  <div class="copy-notification" id="copyNotification">
-    Copied to clipboard!
-  </div>
-
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>© 2026 LEMBOU.SYS // BUILT_FOR_PERFORMANCE</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="https://github.com/lemboupharel" target="_blank" class="nav-link"><i class="ri-github-fill"></i></a>
+        <a href="#" class="nav-link"><i class="ri-linkedin-box-fill"></i></a>
+      </div>
+    </div>
+  </footer>
   <script>
-    // Animated particles
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      const size = Math.random() * 3 + 1;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${15 + Math.random() * 15}s`;
-      particle.style.animationDelay = `${Math.random() * 10}s`;
-      particlesContainer.appendChild(particle);
-    }
+    document.getElementById('signalForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    // Hexagons
-    const hexContainer = document.getElementById('hexagons');
-    for (let i = 0; i < 8; i++) {
-      const hex = document.createElement('div');
-      hex.className = 'hexagon';
-      hex.style.left = `${Math.random() * 90}vw`;
-      hex.style.top = `${Math.random() * 90}vh`;
-      hex.style.animationDuration = `${30 + Math.random() * 20}s`;
-      hex.style.animationDelay = `${Math.random() * 5}s`;
-      hexContainer.appendChild(hex);
-    }
+      const btn = e.target.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = 'TRANSMITTING...';
+      btn.disabled = true;
 
-    // Mobile menu toggle
+      const data = {
+        name: document.getElementById('signalName').value,
+        email: document.getElementById('signalEmail').value,
+        message: document.getElementById('signalMessage').value,
+        date: new Date().toISOString()
+      };
+
+      try {
+        const res = await fetch('/api/signals', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          alert('SIGNAL_ACKNOWLEDGED: Message transmitted successfully.');
+          e.target.reset();
+        } else {
+          alert('TRANSMISSION_ERROR: Failed to send message.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('SYSTEM_FAILURE: Network error occurred.');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
+
+    // Menu toggle logic
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
-
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      
-      if (window.innerWidth > 968) {
-        sidebar.classList.toggle('collapsed');
-        
-        const section = document.querySelector('.section');
-        if (sidebar.classList.contains('collapsed')) {
-          section.style.marginLeft = '0';
-        } else {
-          section.style.marginLeft = '280px';
-        }
-      } else {
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
         sidebar.classList.toggle('active');
-      }
-    });
-
-    // Close sidebar on mobile when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 968) {
-          sidebar.classList.remove('active');
-          menuToggle.classList.remove('active');
-        }
       });
-    });
-
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 968 && 
-          sidebar.classList.contains('active') && 
-          !sidebar.contains(e.target) && 
-          !menuToggle.contains(e.target)) {
-        sidebar.classList.remove('active');
-        menuToggle.classList.remove('active');
-      }
-    });
-
-    // Copy to clipboard functionality
-    const copyButtons = document.querySelectorAll('.copy-btn');
-    const copyNotification = document.getElementById('copyNotification');
-
-    copyButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const textToCopy = button.getAttribute('data-text');
-        
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          // Show notification
-          copyNotification.classList.add('show');
-          
-          // Hide notification after 2 seconds
-          setTimeout(() => {
-            copyNotification.classList.remove('show');
-          }, 2000);
-        }).catch(err => {
-          console.error('Failed to copy text: ', err);
-        });
-      });
-    });
+    }
   </script>
+  <script src="js/particles.js"></script>
 </body>
+
 </html>

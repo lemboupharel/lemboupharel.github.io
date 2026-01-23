@@ -4,152 +4,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificates | LEMBOU.SYS</title>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Certifications | LEMBOU.SYS</title>
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@400;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;700&display=swap"
     rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <style>
-    :root {
-      --primary: #22d3ee;
-      --bg-dark: #09090b;
-      --bg-panel: #18181b;
-      --text-light: #fafafa;
-      --text-dim: #a1a1aa;
-      --border: #27272a;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 64px;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      justify-content: space-between;
-    }
-
-    .topbar-brand {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 700;
-    }
-
-    .topbar-brand span {
-      color: var(--primary);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 120px 2rem 60px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 1rem;
-    }
-
-    .subtitle {
-      color: var(--text-dim);
-      font-family: 'Roboto Mono', monospace;
-      margin-bottom: 3rem;
-    }
-
-    .grid {
+    .cert-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 2rem;
-    }
-
-    .card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      border-radius: 12px;
-      transition: all 0.3s;
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-    }
-
-    .card h3 {
-      margin: 0.5rem 0;
-      color: var(--primary);
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1.1rem;
-    }
-
-    .card .issuer {
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      font-family: 'Roboto Mono', monospace;
+      margin-top: 3rem;
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-brand">LEMBOU.<span>SYS</span></div>
-    <nav style="display: flex; gap: 2rem;">
-      <a href="/" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Home</a>
-      <a href="/projects" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Projects</a>
-      <a href="/certificates"
-        style="color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500;">Certs</a>
-      <a href="/contact" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Contact</a>
-    </nav>
-  </header>
+  <canvas id="particleCanvas"></canvas>
 
-  <div class="container">
-    <div
-      style="font-family: 'Roboto Mono', monospace; color: var(--primary); font-size: 0.8rem; margin-bottom: 0.5rem;">[
-      VALIDATE_CREDENTIALS ]</div>
-    <h1>Certifications</h1>
-    <p class="subtitle">Verified proof of technical competence and continuous learning.</p>
-
-    <div class="grid" id="certGrid">
-      <div style="color: var(--text-dim);">Accessing credential store...</div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="menuToggle"
+          style="background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem; border-radius: 4px; display: none; cursor: pointer;">
+          <i class="ri-menu-line"></i>
+        </button>
+        <a href="/" class="brand">LEMBOU<span>.SYS</span></a>
+      </div>
+      <div class="nav-links">
+        <a href="/contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">ESTABLISH_LINK</a>
+      </div>
     </div>
-  </div>
+  </nav>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="/" class="sidebar-link"><i class="ri-home-line"></i> Home</a>
+      <a href="/projects" class="sidebar-link"><i class="ri-code-box-line"></i> Projects</a>
+      <a href="/certificates" class="sidebar-link active"><i class="ri-award-line"></i> Certificates</a>
+      <a href="/partners" class="sidebar-link"><i class="ri-shake-hands-line"></i> Partners</a>
+      <a href="/contact" class="sidebar-link"><i class="ri-mail-send-line"></i> Contact</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="container animate-fade">
+      <div class="label-mono">[ VERIFIED_CREDENTIALS ]</div>
+      <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-top: 1rem;">Knowledge Base</h1>
+      <p style="color: var(--text-dim); max-width: 600px;">
+        Professional certifications and academic honors in engineering and security.
+      </p>
+
+      <div class="cert-grid" id="certGrid">
+        <div style="color: var(--text-dim); font-family: var(--font-mono);">
+          [ ACCESSING_CREDENTIAL_STORE... ]
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>© 2026 LEMBOU.SYS // BUILT_FOR_PERFORMANCE</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="https://github.com/lemboupharel" target="_blank" class="nav-link"><i class="ri-github-fill"></i></a>
+        <a href="#" class="nav-link"><i class="ri-linkedin-box-fill"></i></a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     async function loadCerts() {
-      const res = await fetch('/api/data');
-      const data = await res.json();
-      const grid = document.getElementById('certGrid');
+      try {
+        const res = await fetch('/api/data');
+        const data = await res.json();
+        const grid = document.getElementById('certGrid');
 
-      grid.innerHTML = data.certificates.map(c => `
-        <a href="${c.link}" target="_blank" class="card">
-          <div class="issuer">${c.issuer} // ${c.date}</div>
-          <h3>${c.title}</h3>
-          <div style="color: var(--primary); font-size: 0.8rem; margin-top: 1rem;">
-            [ VIEW_DOCUMENT ]
+        grid.innerHTML = data.certificates.map(c => `
+          <div class="card">
+            <div class="label-mono" style="font-size: 0.65rem; margin-bottom: 0.5rem;">${c.issuer} // ${c.date}</div>
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary); font-family: var(--font-mono); font-size: 1.1rem; min-height: 3rem;">${c.title}</h3>
+            <a href="${c.link}" target="_blank" class="btn btn-outline" style="width: 100%; font-size: 0.75rem;">
+              <i class="ri-award-line" style="margin-right: 0.5rem;"></i> VIEW_VERIFICATION
+            </a>
           </div>
-        </a>
-      `).join('');
+        `).join('');
+      } catch (err) {
+        document.getElementById('certGrid').innerHTML = '<div style="color: var(--accent-red);">Error synchronizing data.</div>';
+      }
     }
     loadCerts();
   </script>
+  <script src="js/particles.js"></script>
 </body>
 
 </html>

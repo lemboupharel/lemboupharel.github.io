@@ -5,168 +5,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | LEMBOU.SYS</title>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&family=Inter:wght@400;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;700&display=swap"
     rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <style>
-    :root {
-      --primary: #22d3ee;
-      --bg-dark: #09090b;
-      --bg-panel: #18181b;
-      --text-light: #fafafa;
-      --text-dim: #a1a1aa;
-      --border: #27272a;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 64px;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      justify-content: space-between;
-    }
-
-    .topbar-brand {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 700;
-    }
-
-    .topbar-brand span {
-      color: var(--primary);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 120px 2rem 60px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 1rem;
-    }
-
-    .subtitle {
-      color: var(--text-dim);
-      font-family: 'Roboto Mono', monospace;
-      margin-bottom: 3rem;
-    }
-
-    .grid {
+    .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 2rem;
-    }
-
-    .card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: 12px;
-      transition: all 0.3s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: var(--primary);
-      font-family: 'Roboto Mono', monospace;
-    }
-
-    .card p {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      margin-top: 3rem;
     }
 
     .tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
       background: #000;
       border: 1px solid var(--border);
-      padding: 0.25rem 0.75rem;
       border-radius: 4px;
-      font-size: 0.75rem;
-      font-family: 'Roboto Mono', monospace;
+      font-size: 0.7rem;
       color: var(--primary);
+      font-family: var(--font-mono);
+      margin-right: 0.4rem;
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-brand">LEMBOU.<span>SYS</span></div>
-    <nav style="display: flex; gap: 2rem;">
-      <a href="/" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Home</a>
-      <a href="/projects"
-        style="color: var(--text-light); text-decoration: none; font-size: 0.9rem; font-weight: 500;">Projects</a>
-      <a href="/certificates" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Certs</a>
-      <a href="/contact" style="color: var(--text-dim); text-decoration: none; font-size: 0.9rem;">Contact</a>
-    </nav>
-  </header>
+  <canvas id="particleCanvas"></canvas>
 
-  <div class="container">
-    <div
-      style="font-family: 'Roboto Mono', monospace; color: var(--primary); font-size: 0.8rem; margin-bottom: 0.5rem;">[
-      LIST_REPOSITORIES ]</div>
-    <h1>Projects Archive</h1>
-    <p class="subtitle">A collection of systems-level tools, AI experiments, and backend architectures.</p>
-
-    <div class="grid" id="projectGrid">
-      <!-- Loading state -->
-      <div style="color: var(--text-dim);">Loading system artifacts...</div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="menuToggle"
+          style="background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem; border-radius: 4px; display: none; cursor: pointer;">
+          <i class="ri-menu-line"></i>
+        </button>
+        <a href="/" class="brand">LEMBOU<span>.SYS</span></a>
+      </div>
+      <div class="nav-links">
+        <a href="/contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">ESTABLISH_LINK</a>
+      </div>
     </div>
-  </div>
+  </nav>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-links">
+      <a href="/" class="sidebar-link"><i class="ri-home-line"></i> Home</a>
+      <a href="/projects" class="sidebar-link active"><i class="ri-code-box-line"></i> Projects</a>
+      <a href="/certificates" class="sidebar-link"><i class="ri-award-line"></i> Certificates</a>
+      <a href="/partners" class="sidebar-link"><i class="ri-shake-hands-line"></i> Partners</a>
+      <a href="/contact" class="sidebar-link"><i class="ri-mail-send-line"></i> Contact</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="container animate-fade">
+      <div class="label-mono">[ ARCHIVED_PROJECTS ]</div>
+      <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-top: 1rem;">Technical Artifacts</h1>
+      <p style="color: var(--text-dim); max-width: 600px;">
+        A repository of systems software, AI implementations, and security tools.
+      </p>
+
+      <div class="project-grid" id="projectGrid">
+        <!-- Dynamic content -->
+        <div style="color: var(--text-dim); font-family: var(--font-mono);">
+          [ ACCESSING_DATASYNC_SOCKET... ]
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>© 2026 LEMBOU.SYS // BUILT_FOR_PERFORMANCE</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="https://github.com/lemboupharel" target="_blank" class="nav-link"><i class="ri-github-fill"></i></a>
+        <a href="#" class="nav-link"><i class="ri-linkedin-box-fill"></i></a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     async function loadProjects() {
-      const res = await fetch('/api/data');
-      const data = await res.json();
-      const grid = document.getElementById('projectGrid');
+      try {
+        const res = await fetch('/api/data');
+        const data = await res.json();
+        const grid = document.getElementById('projectGrid');
 
-      grid.innerHTML = data.projects.map(p => `
-        <a href="${p.link}" target="_blank" class="card">
-          <div style="font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.5rem;">${p.category.toUpperCase()}</div>
-          <h3>${p.title}</h3>
-          <p>${p.description}</p>
-          <div class="tags">
-            ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        grid.innerHTML = data.projects.map(p => `
+          <div class="card">
+            <div class="label-mono" style="font-size: 0.65rem; margin-bottom: 0.5rem;">${p.category}</div>
+            <h3 style="margin-bottom: 1rem; color: var(--primary); font-family: var(--font-mono);">${p.title}</h3>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; min-height: 4.5rem;">${p.description}</p>
+            <div style="margin-bottom: 1.5rem;">
+              ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <a href="${p.link}" target="_blank" class="btn btn-outline" style="width: 100%; font-size: 0.75rem;">
+              <i class="ri-github-fill" style="margin-right: 0.5rem;"></i> SOURCE_CODE
+            </a>
           </div>
-        </a>
-      `).join('');
+        `).join('');
+      } catch (err) {
+        document.getElementById('projectGrid').innerHTML = '<div style="color: var(--accent-red);">Error synchronizing data.</div>';
+      }
     }
     loadProjects();
   </script>
+  <script src="js/particles.js"></script>
 </body>
 
 </html>

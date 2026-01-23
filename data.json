@@ -1,40 +1,8 @@
 {
-    "projects": [
-        {
-            "id": "1",
-            "title": "Linux Kernel Module",
-            "description": "A custom character device driver for Linux kernel, demonstrating memory mapping and interrupt handling.",
-            "category": "Systems Programming",
-            "tags": [
-                "C",
-                "Linux",
-                "Kernel"
-            ],
-            "link": "https://github.com/pharel/kernel-module"
-        },
-        {
-            "id": "2",
-            "title": "Network Traffic Analyzer",
-            "description": "AI-powered tool for detecting anomalous patterns in network traffic using BPF and Python.",
-            "category": "Security & AI",
-            "tags": [
-                "Python",
-                "AI",
-                "Networking",
-                "eBPF"
-            ],
-            "link": "https://github.com/pharel/traffic-analyzer"
-        }
-    ],
-    "certificates": [
-        {
-            "id": "1",
-            "title": "Certified Ethical Hacker (CEH)",
-            "issuer": "EC-Council",
-            "date": "2024",
-            "link": "#"
-        }
-    ],
+    "projects": [],
+    "certificates": [],
+    "partners": [],
+    "signals": [],
     "admin": {
         "password": "change_me_later"
     }

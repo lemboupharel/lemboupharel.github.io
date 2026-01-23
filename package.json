@@ -4,6 +4,7 @@
   "description": "Create a stunning and professional portfolio website from scratch!",
   "main": "api/index.js",
   "scripts": {
+    "dev": "node api/index.js",
     "run": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,8 @@
   },
   "homepage": "https://github.com/lemboupharel/lemboupharel.github.io#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "@vercel/kv": "^3.0.0",
+    "express": "^5.2.1",
+    "ioredis": "^5.9.2"
   }
 }

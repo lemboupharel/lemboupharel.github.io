@@ -4,849 +4,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Pharel's personal portfolio showcasing projects, experience, and contact information.">
-  <meta name="author" content="Pharel" />
-  <link rel="canonical" href="https://www.pharel.dev/" />
-  <title>Lembou Pharel | Backend Developer & Cybersecurity Engineer</title>
+  <title>Lembou Pharel | Systems Engineering</title>
   <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;700&display=swap"
     rel="stylesheet">
-  <style>
-    :root {
-      --primary: #22d3ee;
-      --secondary: #f97316;
-      --bg-dark: #09090b;
-      --bg-panel: #18181b;
-      --text-light: #fafafa;
-      --text-dim: #a1a1aa;
-      --border: #27272a;
-      --code-bg: #000000;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-      overflow-x: hidden;
-      line-height: 1.5;
-    }
-
-    /* Technical Background */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at 50% 50%, #1e1e2e 0%, #09090b 100%);
-    }
-
-    .grid-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    /* Top Bar */
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 64px;
-      background: rgba(9, 9, 11, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      justify-content: space-between;
-    }
-
-    .topbar-brand {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1rem;
-      letter-spacing: -0.5px;
-      font-weight: 700;
-      color: var(--text-light);
-    }
-
-    .topbar-brand span {
-      color: var(--primary);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding-top: 120px;
-      padding-bottom: 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    .terminal-container {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      font-family: 'Roboto Mono', monospace;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      margin-bottom: 3rem;
-    }
-
-    .terminal-header {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 1rem;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .dot.red {
-      background: #ff5f56;
-    }
-
-    .dot.yellow {
-      background: #ffbd2e;
-    }
-
-    .dot.green {
-      background: #27c93f;
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      letter-spacing: -2px;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--text-dim);
-      max-width: 600px;
-      margin-bottom: 2rem;
-      font-family: 'Roboto Mono', monospace;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(34, 211, 238, 0.1);
-      color: var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    .pulse {
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
-      }
-
-      70% {
-        box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
-      }
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      padding: 0.9rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: var(--secondary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #ea580c;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
-    }
-
-    .btn-secondary {
-      background: var(--bg-panel);
-      color: var(--text-light);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(34, 211, 238, 0.1);
-      transform: translateY(-3px);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-item:nth-child(1) .stat-number {
-      color: var(--secondary);
-    }
-
-    .stat-item:nth-child(2) .stat-number {
-      color: #3b82f6;
-    }
-
-    .stat-item:nth-child(3) .stat-number {
-      color: #22c55e;
-    }
-
-    .stat-label {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
-    .hero-image img {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid transparent;
-      background: linear-gradient(135deg, #facc15, #a855f7, #22d3ee);
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-      box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
-      animation: profilePulse 3s ease-in-out infinite;
-    }
-
-    @keyframes profilePulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
-      }
-
-      50% {
-        box-shadow: 0 0 80px rgba(168, 85, 247, 0.6);
-      }
-    }
-
-    /* Section Styles */
-    .section {
-      position: relative;
-      padding: 5rem 2rem;
-      z-index: 1;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
-    }
-
-    .section-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 4rem;
-      box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
-      border: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .section-header {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .section-description {
-      text-align: center;
-      color: var(--text-dim);
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    /* Cards Grid */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.08), rgba(255, 255, 255, 0.03));
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid rgba(34, 211, 238, 0.2);
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(34, 211, 238, 0.3);
-      background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(255, 255, 255, 0.06));
-      border-color: var(--primary);
-    }
-
-    .card h4 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .card p {
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-
-    .badge-js {
-      background: rgba(247, 223, 30, 0.2);
-      color: #f7df1e;
-    }
-
-    .badge-ts {
-      background: rgba(49, 120, 198, 0.2);
-      color: #3178c6;
-    }
-
-    .badge-c {
-      background: rgba(85, 169, 255, 0.2);
-      color: #55a9ff;
-    }
-
-    /* Setup Section */
-    .setup-box {
-      display: flex;
-      gap: 3rem;
-      background: rgba(15, 23, 42, 0.9);
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid rgba(34, 211, 238, 0.2);
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .ascii-art {
-      font-family: 'Roboto Mono', monospace;
-      color: var(--primary);
-      font-size: 0.9rem;
-      line-height: 1.2;
-      white-space: pre;
-    }
-
-    .setup-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.8rem 2rem;
-      flex: 1;
-    }
-
-    .setup-item strong {
-      color: var(--primary);
-    }
-
-    .terminal-command {
-      background: #0a0a0a;
-      padding: 1.5rem;
-      border-radius: 12px;
-      font-family: 'Roboto Mono', monospace;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(34, 211, 238, 0.2);
-    }
-
-    .terminal-user {
-      color: #22c55e;
-      font-weight: 600;
-    }
-
-    .terminal-host {
-      color: #facc15;
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      position: relative;
-      padding: 4rem 2rem 2rem;
-      background: rgba(15, 23, 42, 0.95);
-      border-top: 1px solid rgba(34, 211, 238, 0.2);
-      z-index: 1;
-      margin-left: 280px;
-      transition: margin-left 0.3s ease;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 3rem;
-    }
-
-    .footer-section {
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .footer-section h4 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: var(--text-dim);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.5rem;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .social-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(34, 211, 238, 0.1);
-      border-radius: 50%;
-      color: var(--primary);
-      font-size: 1.3rem;
-      transition: all 0.3s;
-    }
-
-    .social-icon:hover {
-      background: var(--primary);
-      color: var(--bg-dark);
-      transform: translateY(-3px);
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding: 2rem 0 1rem;
-      color: var(--text-dim);
-      border-top: 1px solid rgba(34, 211, 238, 0.1);
-      margin-top: 3rem;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-light);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .hero,
-      .section,
-      footer {
-        margin-left: 0;
-      }
-
-      .topbar {
-        padding: 0 1rem;
-      }
-
-      .hero-title {
-        font-size: 2.5rem;
-      }
-
-      .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .section-container {
-        padding: 2rem;
-      }
-
-      .setup-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="grid-overlay"></div>
-    <div class="hex-container" id="hexagons"></div>
-    <div id="particles"></div>
-  </div>
+  <canvas id="particleCanvas"></canvas>
 
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="topbar-brand">LEMBOU PHAREL</div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="menuToggle"
+          style="background: none; border: 1px solid var(--border); color: var(--text); padding: 0.4rem; border-radius: 4px; display: none; cursor: pointer;">
+          <i class="ri-menu-line"></i>
+        </button>
+        <a href="/" class="brand">LEMBOU<span>.SYS</span></a>
+      </div>
+      <div class="nav-links">
+        <a href="/contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">ESTABLISH_LINK</a>
+      </div>
     </div>
-    <div class="topbar-right">
-      <button class="nav-cta" onclick="location.href='/contact'">Contact</button>
-    </div>
-  </header>
+  </nav>
 
-  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
-    <ul class="nav-links">
-      <li><a href="/" class="active"><i class="ri-home-line"></i> Home</a></li>
-      <li><a href="/projects"><i class="ri-code-box-line"></i> Projects</a></li>
-      <li><a href="/certificates"><i class="ri-award-line"></i> Certificates</a></li>
-      <li><a href="/partners"><i class="ri-shake-hands-line"></i> Partners</a></li>
-      <li><a href="/contact"><i class="ri-mail-send-line"></i> Contact</a></li>
-    </ul>
-    <div class="sidebar-footer">
-      © 2026 Lembou Pharel
+    <div class="sidebar-links">
+      <a href="/" class="sidebar-link active"><i class="ri-home-line"></i> Home</a>
+      <a href="/projects" class="sidebar-link"><i class="ri-code-box-line"></i> Projects</a>
+      <a href="/certificates" class="sidebar-link"><i class="ri-award-line"></i> Certificates</a>
+      <a href="/partners" class="sidebar-link"><i class="ri-shake-hands-line"></i> Partners</a>
+      <a href="/contact" class="sidebar-link"><i class="ri-mail-send-line"></i> Contact</a>
     </div>
   </aside>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1 class="hero-title">Hi, I'm Lembou Pharel</h1>
-        <p class="hero-subtitle">Backend Developer | Cybersecurity Engineer</p>
-        <p class="hero-description">
-          I specialize in building robust, secure backend systems and solving real-world problems with scalable
-          technology.
-          Passionate about engineering reliable software that makes a difference.
-        </p>
-        <div class="hero-buttons">
-          <a href="https://wa.link/xf87m9" target="_blank" class="btn btn-primary">Hire Me</a>
-          <a href="mailto:pharellembou@gmail.com" class="btn btn-secondary">pharellembou@gmail.com</a>
+  <main class="main-content">
+    <div class="container animate-fade">
+      <div style="display: flex; gap: 4rem; align-items: flex-start; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <div class="label-mono" style="margin-bottom: 1rem;">[ INTERNAL_SYSTEM_PROFILE ]</div>
+          <h1
+            style="font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 1.5rem;">
+            Systems Engineering & <br><span style="color: var(--primary)">Applied AI Engineer.</span>
+          </h1>
+          <p style="color: var(--text-dim); font-size: 1.25rem; max-width: 600px; margin-bottom: 3rem;">
+            I am a technical engineer who understands how things really work.
+            Focusing on low-level systems, networking, and applied intelligence.
+          </p>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number">5+</span>
-            <span class="stat-label">Years Experience</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">82+</span>
-            <span class="stat-label">Projects</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">15+</span>
-            <span class="stat-label">Happy Clients</span>
+
+        <div style="position: relative;">
+          <img src="./assets/header.jpg" alt="Lembou Pharel"
+            style="width: 300px; height: 300px; border-radius: 16px; object-fit: cover; border: 3px solid rgba(6, 182, 212, 0.3); box-shadow: 0 20px 60px rgba(6, 182, 212, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;">
+          <div
+            style="position: absolute; bottom: -12px; right: -12px; background: linear-gradient(135deg, #06b6d4, #0891b2); border: 3px solid white; color: white; padding: 0.5rem 1rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);">
+            <i class="ri-checkbox-circle-fill" style="margin-right: 0.3rem;"></i>ONLINE
           </div>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="./assets/header.jpg" alt="Lembou Pharel">
+
+      <!-- Terminal Component -->
+      <div
+        style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 12px; padding: 2rem; font-family: var(--font-mono); margin: 4rem 0; box-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);">
+        <div style="display: flex; gap: 8px; margin-bottom: 1.5rem;">
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; box-shadow: 0 0 8px #ff5f56;">
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e; box-shadow: 0 0 8px #ffbd2e;">
+          </div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f; box-shadow: 0 0 8px #27c93f;">
+          </div>
+        </div>
+        <div style="color: #10b981; font-weight: 600;">$ whoami</div>
+        <div style="margin-bottom: 1.5rem; color: #e2e8f0;">Lembou Pharel: A Software Engineering / Systems & Applied AI
+          Engineer. Not a "basic web dev".</div>
+
+        <div style="color: #10b981; font-weight: 600;">$ fetch --full-profile</div>
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.75rem 2rem; color: #cbd5e1;">
+          <span style="color: #06b6d4; font-weight: 600;">SYSTEMS</span> <span>C, C++, Linux, Networking</span>
+          <span style="color: #06b6d4; font-weight: 600;">AICORE</span> <span>Applied Artificial Intelligence</span>
+          <span style="color: #06b6d4; font-weight: 600;">SECURITY</span> <span>Network & Security Tooling</span>
+          <span style="color: #06b6d4; font-weight: 600;">PLATFORM</span> <span>Cross-platform Apps</span>
+          <span style="color: #06b6d4; font-weight: 600;">BACKEND</span> <span>NodeJS, Blockchain Development</span>
+        </div>
+      </div>
+
+      <!-- Personality Section -->
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+        <div class="card">
+          <div class="label-mono" style="margin-bottom: 1rem;">[ PERSONALITY_CORE ]</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem;">
+            <span class="tag">Independent</span>
+            <span class="tag">Technically Curious</span>
+            <span class="tag">Complex-Driven</span>
+            <span class="tag">Arch/Hyprland</span>
+            <span class="tag">Linux Forever</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="label-mono" style="margin-bottom: 1rem;">[ WORK_STYLE ]</div>
+          <ul style="list-style: none; color: var(--text-dim); font-size: 0.9rem;">
+            <li>> Document everything</li>
+            <li>> Collaborative efforts</li>
+            <li>> Ship faster</li>
+            <li>> Practical > Flashy</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="label-mono" style="margin-bottom: 1rem;">[ ENVIRONMENT_PREFS ]</div>
+          <ul style="list-style: none; color: var(--text-dim); font-size: 0.9rem;">
+            <li>> Good laptop</li>
+            <li>> Stable internet</li>
+            <li>> Quiet workspace</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem;">
+        <a href="/projects" class="btn btn-primary">VIEW_ARTIFACTS</a>
+        <a href="/contact" class="btn btn-outline">ESTABLISH_LINK</a>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- About & Skills -->
-  <section class="section" id="about">
-    <div class="section-container">
-      <h2 class="section-header">About & Skills</h2>
-      <p class="section-description">
-        I apply engineering principles to design, develop, test, and maintain reliable software systems.
-        My focus is on creating efficient solutions that meet customer needs, using modern tools and technologies
-        to ensure software quality and performance.
-      </p>
-      <div class="cards-grid">
-        <div class="card">
-          <h4><i class="ri-code-line"></i> Web Development</h4>
-          <p>HTML, CSS, JavaScript, MySQL, NodeJS, Firebase, PostgreSQL, SQLite — frontend & backend development with
-            modern frameworks and best practices.</p>
-        </div>
-        <div class="card">
-          <h4><i class="ri-shield-keyhole-line"></i> Network Security</h4>
-          <p>Monitor network traffic using Wireshark, conduct vulnerability assessments with tools like Nmap, and secure
-            network infrastructure against threats.</p>
-        </div>
-        <div class="card">
-          <h4><i class="ri-robot-line"></i> Systems Programming</h4>
-          <p>Write low-level code, networking stacks, memory management, I/O and device interfacing for optimal
-            performance.</p>
-        </div>
-        <div class="card">
-          <h4><i class="ri-tools-fill"></i> Reverse Engineering</h4>
-          <p>Analyzing compiled programs (binary) to understand behavior, logic, data formats, protocols, or
-            vulnerabilities when source code is not available.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Setup -->
-  <section class="section" id="setup">
-    <div class="section-container">
-      <h2 class="section-header">My Development Setup</h2>
-      <div class="setup-box">
-        <div class="ascii-art">
-          .--.
-          |o_o |
-          |:_/ |
-          // \ \
-          (| | )
-          /'\_ _/`\
-          \___)=(___/
-        </div>
-        <div class="setup-grid">
-          <div class="setup-item"><strong>User:</strong> pharel@archlinux</div>
-          <div class="setup-item"><strong>Host:</strong> HP ENVY</div>
-          <div class="setup-item"><strong>OS:</strong> Arch Linux</div>
-          <div class="setup-item"><strong>Kernel:</strong> Linux 6.16.8-zen2-1</div>
-          <div class="setup-item"><strong>Uptime:</strong> 742d</div>
-          <div class="setup-item"><strong>Packages:</strong> 2181 (pacman)</div>
-          <div class="setup-item"><strong>Shell:</strong> zsh 5.9</div>
-          <div class="setup-item"><strong>WM:</strong> Hyprland</div>
-          <div class="setup-item"><strong>Resolution:</strong> 1920x1080</div>
-          <div class="setup-item"><strong>Terminal:</strong> kitty</div>
-        </div>
-      </div>
-      <div class="terminal-command">
-        <span class="terminal-user">pharel</span>@<span class="terminal-host">archlinux</span> :~$
-        <br>$ neofetch --config off
-        <br><small style="color: #6b7280;">(example command)</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="footer-container">
-      <div class="footer-section">
-        <h4>Lembou Pharel</h4>
-        <p style="color: var(--text-dim); margin-bottom: 1rem;">
-          Building modern software experiences with passion and precision.
-          Striving for excellence, one project at a time.
-        </p>
-        <p style="color: var(--text-dim);">
-          <i class="ri-mail-line"></i> pharellembou@gmail.com
-        </p>
-        <div class="social-icons">
-          <a href="https://github.com/lemboupharel" target="_blank" class="social-icon">
-            <i class="ri-github-fill"></i>
-          </a>
-          <a href="https://linkedin.com/in/lembou-pharel" target="_blank" class="social-icon">
-            <i class="ri-linkedin-box-fill"></i>
-          </a>
-          <a href="https://twitter.com/lemboupharel" target="_blank" class="social-icon">
-            <i class="ri-twitter-x-fill"></i>
-          </a>
-          <a href="https://instagram.com/lemboupharel" target="_blank" class="social-icon">
-            <i class="ri-instagram-line"></i>
-          </a>
-        </div>
-      </div>
-      <div class="footer-section">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="./certificates.html">Certificates</a></li>
-          <li><a href="#setup">Setup</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom"></div>
-  </footer>
-
+  <script src="js/particles.js"></script>
   <script>
-    // Animated particles
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      const size = Math.random() * 3 + 1;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.left = `${Math.random() * 100}vw`;
-      particle.style.animationDuration = `${15 + Math.random() * 15}s`;
-      particle.style.animationDelay = `${Math.random() * 10}s`;
-      particlesContainer.appendChild(particle);
-    }
-
-    // Hexagons
-    const hexContainer = document.getElementById('hexagons');
-    for (let i = 0; i < 8; i++) {
-      const hex = document.createElement('div');
-      hex.className = 'hexagon';
-      hex.style.left = `${Math.random() * 90}vw`;
-      hex.style.top = `${Math.random() * 90}vh`;
-      hex.style.animationDuration = `${30 + Math.random() * 20}s`;
-      hex.style.animationDelay = `${Math.random() * 5}s`;
-      hexContainer.appendChild(hex);
-    }
-
-    // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
-
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-
-      if (window.innerWidth > 968) {
-        sidebar.classList.toggle('collapsed');
-
-        // Update margin on content
-        const hero = document.querySelector('.hero');
-        const sections = document.querySelectorAll('.section');
-        const footer = document.querySelector('footer');
-
-        if (sidebar.classList.contains('collapsed')) {
-          hero.style.marginLeft = '0';
-          sections.forEach(s => s.style.marginLeft = '0');
-          footer.style.marginLeft = '0';
-        } else {
-          hero.style.marginLeft = '280px';
-          sections.forEach(s => s.style.marginLeft = '280px');
-          footer.style.marginLeft = '280px';
-        }
-      } else {
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
         sidebar.classList.toggle('active');
-      }
-    });
-
-    // Close sidebar on mobile when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 968) {
-          sidebar.classList.remove('active');
-          menuToggle.classList.remove('active');
-        }
-
-        // Update active state
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
       });
-    });
+    }
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 968 &&
-        sidebar.classList.contains('active') &&
-        !sidebar.contains(e.target) &&
-        !menuToggle.contains(e.target)) {
-        sidebar.classList.remove('active');
-        menuToggle.classList.remove('active');
-      }
-    });
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
         }
       });
+    }, observerOptions);
+
+    document.querySelectorAll('.card, .animate-fade').forEach(el => {
+      el.classList.add('scroll-reveal');
+      observer.observe(el);
     });
   </script>
+
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>© 2026 LEMBOU.SYS // BUILT_FOR_PERFORMANCE</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="https://github.com/lemboupharel" target="_blank" class="nav-link"><i class="ri-github-fill"></i></a>
+        <a href="#" class="nav-link"><i class="ri-linkedin-box-fill"></i></a>
+      </div>
+    </div>
+  </footer>
 </body>
+
+</html>
