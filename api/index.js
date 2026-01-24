@@ -116,6 +116,25 @@ app.post("/api/admin/login", async (req, res) => {
   }
 });
 
+// Change Password
+app.post("/api/admin/change-password", async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const data = await readData();
+
+    if (currentPassword !== data.admin.password) {
+      return res.status(401).json({ success: false, message: "Incorrect current password" });
+    }
+
+    data.admin.password = newPassword;
+    await writeData(data);
+
+    res.json({ success: true, message: "Password updated successfully" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to update password" });
+  }
+});
+
 // --- CRUD Operations Generator ---
 const createCrudEndpoints = (resourceName) => {
   // Create

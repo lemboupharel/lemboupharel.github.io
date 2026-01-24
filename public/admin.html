@@ -229,6 +229,9 @@
                 <button class="tab" onclick="switchTab('signals')">
                     <i class="ri-signal-tower-line"></i> Signals
                 </button>
+                <button class="tab" onclick="switchTab('settings')">
+                    <i class="ri-settings-line"></i> Settings
+                </button>
             </div>
 
             <!-- Projects Tab -->
@@ -259,6 +262,28 @@
             <div class="tab-content" id="signals-content">
                 <div class="label-mono" style="margin-bottom: 1rem;">INCOMING_TRANSMISSIONS</div>
                 <div class="item-list" id="signalsList"></div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings-content">
+                <div class="card" style="max-width: 500px;">
+                    <div class="label-mono">[ SECURITY_MODULE ]</div>
+                    <h2 style="margin: 1rem 0;">Change Admin Password</h2>
+                    
+                    <label>Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="••••••••">
+                    
+                    <label>New Password</label>
+                    <input type="password" id="newPassword" placeholder="••••••••">
+                    
+                    <label>Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" placeholder="••••••••">
+                    
+                    <div id="changePasswordError" style="color: #ef4444; margin-bottom: 1rem; font-size: 0.8rem; display: none;"></div>
+                    <div id="changePasswordSuccess" style="color: #10b981; margin-bottom: 1rem; font-size: 0.8rem; display: none;"></div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;" onclick="changePassword()">UPDATE_SECURITY_KEY</button>
+                </div>
             </div>
         </div>
     </main>
@@ -557,6 +582,53 @@
             } catch (err) {
                 console.error('Delete error:', err);
                 alert('Failed to delete. Check console for details.');
+            }
+        }
+
+        async function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+            const errorDiv = document.getElementById('changePasswordError');
+            const successDiv = document.getElementById('changePasswordSuccess');
+
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            if (!currentPassword || !newPassword || !confirmNewPassword) {
+                errorDiv.textContent = "FIELD_MISSING: All fields are required";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (newPassword !== confirmNewPassword) {
+                errorDiv.textContent = "MATCH_FAILURE: New passwords do not match";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/change-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    successDiv.textContent = "SUCCESS: " + data.message;
+                    successDiv.style.display = 'block';
+                    document.getElementById('currentPassword').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('confirmNewPassword').value = '';
+                } else {
+                    errorDiv.textContent = "UPDATE_FAILURE: " + data.message;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = "SYSTEM_ERROR: Failed to update password";
+                errorDiv.style.display = 'block';
             }
         }
 

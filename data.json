@@ -1,9 +1,9 @@
 {
-    "projects": [],
-    "certificates": [],
-    "partners": [],
-    "signals": [],
-    "admin": {
-        "password": "change_me_later"
-    }
+  "projects": [],
+  "certificates": [],
+  "partners": [],
+  "signals": [],
+  "admin": {
+    "password": "change_me_later"
+  }
 }
